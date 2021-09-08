@@ -117,14 +117,18 @@ gen x0 = 0
         local red5 `r(p5)'  
         local red6 `r(p6)'
 
-        colorpalette sfso, languages nograph
-        local list r(p) 
-        ** Age groups
-        local red `r(p1)'  
-        local blu `r(p2)'    
-        local gre `r(p3)'    
-        local yel `r(p4)'    
-        local pur `r(p5)'  
+** COLORS - W3 flat colors
+    colorpalette w3 flat, nograph
+    local list r(p) 
+    ** Age groups
+    local gre `r(p7)'
+    local blu `r(p8)'  
+    local pur `r(p9)'
+    local yel `r(p11)'
+    local ora `r(p12)'    
+    local red `r(p13)'       
+    local gry `p(p19)'   
+
 
         #delimit ;
             gr twoway 
@@ -136,9 +140,92 @@ gen x0 = 0
 
                 /// Observed
                 ///(line cases date if scenario==0 & iso=="BRB" , sort lc("gs4") lw(0.4) lp("-"))
-                (line cases date if scenario==0 , sort lc("gs4") lw(0.4) lp("-"))
-                (line rcase_av_14 date if scenario==0 , sort lc("`red5'*1.2") lw(0.2) lp("l"))
-                (rarea x0 rcase_av_14 date if scenario==0 , sort col("`red5'%40") lw(none))        
+                (line cases date if scenario==0 , sort lc("gs8") lw(0.4) lp("-"))
+                (line rcase_av_14 date if scenario==0 , sort lc("`ora'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_14 date if scenario==0 , sort col("`ora'%40") lw(none))        
+
+                /// Predictions 
+                /// (rarea cases_scen1 cases_scen2 date if iso=="BRB" , sort col("`red1'%40") lw(none))         
+                /// (rarea cases_scen2 cases_scen3 date if iso=="BRB" , sort col("`red2'%40") lw(none))         
+                /// (rarea cases_scen3 cases_scen4 date if iso=="BRB" , sort col("`red3'%40") lw(none))         
+                /// (rarea cases_scen4 cases_scen5 date if iso=="BRB" , sort col("`red4'%40") lw(none))         
+                /// (line cases_scen1 date if scenario==1 & iso=="BRB" , sort lc("gs4") lw(0.2) lp("-"))
+                /// (line cases_scen5 date if scenario==5 & iso=="BRB" , sort lc("gs4") lw(0.2) lp("-"))
+                /// (line cases_scen2 date if scenario==2 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
+                /// (line cases_scen3 date if scenario==3 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
+                /// (line cases_scen4 date if scenario==4 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
+
+                ,
+                    plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
+                    graphregion(color(gs16) ic(gs16) ilw(thin) lw(thin)) 
+                    bgcolor(white) 
+                    ysize(6) xsize(18)
+                
+
+                    xlab(
+                            22281 "1 Jan 21"
+                            22371 "1 Apr 21"
+                            22462 "1 Jul 21" 
+                            22554 "1 Oct 21" 
+                    , 
+                    labs(4) notick nogrid glc(gs16))
+                    xscale(noline   range(22281(10)22585)) 
+                    xtitle("Outbreak month (Jan to Oct 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
+
+                    ylab(0 10 20 30 40 50
+                    ,
+                    labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
+                    ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
+                    yscale(noline) 
+                    ///ytick(0(5)50)
+
+                    text(40.5 22330 "Barbados"         ,  place(e) size(5.5) color(gs8) just(left))
+                    /// text($ypos2 $xpos0 "`date_string2'"         ,  place(e) size(5.5) color(gs0) just(left))
+
+                    /// text($ypos1 $xpos1 "CASES"                      ,  place(w) size(5) color(gs4) just(left))
+                    /// text($ypos2 $xpos1 "Total: ${m01_`country'}"    ,  place(w) size(5) color(gs8) just(left))
+                    /// text($ypos3 $xpos1 "14-day: ${m03_`country'}"   ,  place(w) size(5) color(`red2') just(left))
+
+                    /// text($ypos1 $xpos2 "DEATHS"                     ,  place(w) size(5) color(gs4) just(right))
+                    /// text($ypos2 $xpos2 "Total: ${m02_`country'}"    ,  place(w) size(5) color(gs8) just(right))
+                    /// text($ypos3 $xpos2 "14-day: ${m04_`country'}"   ,  place(w) size(5) color(`red2') just(right))
+
+                    /// text($ypos1 $xpos3 "RATE"                       ,  place(w) size(5) color(gs4) just(right))
+                    /// text($ypos2 $xpos3 "${rate5_`country'} "        ,  place(w) size(5) color(gs8) just(right))
+                    /// text($ypos3 $xpos3 "${up_`country'}"            ,  place(w) size(5) color(`red2') just(right))
+                    /// text($ypos3 $xpos3 "${down_`country'}"          ,  place(w) size(5) color(`gre') just(right))
+
+
+                    legend(off size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
+                    region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
+                    symysize(5) symxsize(7)
+                    order(4 5 6 7) 
+                    lab(4 "0-10%")
+                    lab(5 "11-25%")
+                    lab(6 "26-50%")
+                    lab(7 "51-75%")
+                    )
+                    name(observed_BRB) 
+                    ;
+            #delimit cr
+            graph export "`outputpath'/caserate_BRB_clean.png", replace width(4000) 
+
+
+
+
+        #delimit ;
+            gr twoway 
+                /// outer boxes 
+                /// (scatteri `outer1'  , recast(area) lw(0.2) lc(gs10) fc(none) )                            
+                /// (scatteri `outer2a' , recast(line) lw(0.2) lc(gs10) fc(none) )
+                /// (scatteri `outer2b' , recast(line) lw(0.2) lc(gs10) fc(none) )
+                /// (scatteri `outer2c' , recast(line) lw(0.2) lc(gs10) fc(none) )
+
+                /// Observed
+                ///(line cases date if scenario==0 & iso=="BRB" , sort lc("gs4") lw(0.4) lp("-"))
+                (line cases date if scenario==0 , sort lc("gs8") lw(0.4) lp("-"))
+                (line rcase_av_14 date if scenario==0 , sort lc("`ora'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_14 date if scenario==0 , sort col("`ora'%40") lw(none))        
 
                 /// Predictions 
                 (rarea cases_scen1 cases_scen2 date if iso=="BRB" , sort col("`red1'%40") lw(none))         
@@ -160,20 +247,19 @@ gen x0 = 0
 
                     xlab(
                             22281 "1 Jan 21"
-                            22340 "1 Mar 21"
-                            22401 "1 May 21" 
+                            22371 "1 Apr 21"
                             22462 "1 Jul 21" 
-                            22524 "1 Sep 21" 
+                            22554 "1 Oct 21" 
                     , 
                     labs(4) notick nogrid glc(gs16))
-                    xscale(noline) 
+                    xscale(noline range(22281(10)22585)) 
                     xtitle("Outbreak month (Jan to Oct 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0 10 20 30 40   
+                    ylab(0 10 20 30 40 50  
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                    yscale(noline) 
+                    yscale(noline ) 
                     ///ytick(0(5)50)
 
                     text(40.5 22330 "Barbados"         ,  place(e) size(5.5) color(gs8) just(left))
@@ -202,7 +288,7 @@ gen x0 = 0
                     lab(6 "26-50%")
                     lab(7 "51-75%")
                     )
-                    name(pr_BRB) 
+                    name(predicted_BRB) 
                     ;
             #delimit cr
             graph export "`outputpath'/caserate_predict_BRB.png", replace width(4000) 

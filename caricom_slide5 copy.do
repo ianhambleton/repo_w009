@@ -1,6 +1,6 @@
 ** HEADER -----------------------------------------------------
 **  DO-FILE METADATA
-    //  algorithm name			    caricom_04figure.do
+    //  algorithm name			    caricom_04figure_profile.do
     //  project:				    WHO Global Health Estimates
     //  analysts:				    Ian HAMBLETON
     // 	date last modified	    	31-MAr-2021
@@ -26,7 +26,7 @@
 
     ** Close any open log file and open a new log file
     capture log close
-    log using "`logpath'\caricom_04figure", replace
+    log using "`logpath'\caricom_04figure_profile", replace
 ** HEADER -----------------------------------------------------
 
 ** CARICOM region
@@ -40,41 +40,42 @@ use "`datapath'\caricom_covid", clear
 
     ** Keep CARICOM only
     keep if group==1
-    collapse (sum) case death pop , by(date)
-    rename pop t1
-    egen pop= max(t1) 
-    format pop %15.0fc
-    drop t1 
+        collapse (sum) case death pop , by(date)
+        rename pop t1
+        egen pop= max(t1) 
+        format pop %15.0fc
+        drop t1 
 
-    ** Attack Rate (per 1,000 --> not yet used)
-    gen rcase = (case / pop) * 100000
-    label var rcase "Rate of new case per 100,000"
+        ** Attack Rate (per 1,000 --> not yet used)
+        gen rcase = (case / pop) * 100000
+        label var rcase "Rate of new case per 100,000"
 
-    label var pop "Country population"
-    label var date "Date of outbreak" 
-    label var case "New daily cases"
-    label var death "New daily deaths"
+        label var pop "Country population"
+        label var date "Date of outbreak" 
+        label var case "New daily cases"
+        label var death "New daily deaths"
 
-    format pop %15.1fc
+        format pop %15.1fc
 
-    ** Max rate 
-    ** Elapsed days for X-axis
-    sort date 
-    gen elapsed = _n
-    order elapsed , after(date)
+        ** Max rate 
+        ** Elapsed days for X-axis
+        sort date 
+        gen elapsed = _n
+        order elapsed , after(date)
 
-    gen tcase = sum(case)
-    gen tdeath = sum(death)
-  
+        gen tcase = sum(case)
+        gen tdeath = sum(death)
+    
 
-    ** SMOOTHED CASE rate 
-    asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
-    asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
-    asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
-    ** LOWESS smooth on 14 day mean rate
-    lowess rcase_av_14 date, bwidth(0.1) gen(lowess_14) nograph
-    ** gen accelerate = lowess_14 - lowess_14[_n-1] 
+        ** SMOOTHED CASE rate 
+        asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
+        asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
+        asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
+        ** LOWESS smooth on 14 day mean rate
+        lowess rcase_av_14 date, bwidth(0.1) gen(lowess_14) nograph
+        ** gen accelerate = lowess_14 - lowess_14[_n-1] 
 
+    ** Save CARICOM only dataset - will append to country-data later in DO file 
     tempfile caricom
     save `caricom', replace
 
@@ -257,7 +258,7 @@ sort iso date
 ** -------------------------------------------
 
 local clist "AIA ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB CAR"
-** local clist "CAR BRB"
+local clist "CAR BRB"
 foreach country of local clist {
     
 preserve
@@ -275,17 +276,14 @@ preserve
         local red5 `r(p5)'  
         local red6 `r(p6)'
 
-** COLORS - W3 flat colors
-    colorpalette w3 flat, nograph
-    local list r(p) 
-    ** Age groups
-    local gre `r(p7)'
-    local blu `r(p8)'  
-    local pur `r(p9)'
-    local yel `r(p11)'
-    local ora `r(p12)'    
-    local red `r(p13)'       
-    local gry `p(p19)'   
+        colorpalette sfso, languages nograph
+        local list r(p) 
+        ** Age groups
+        local red `r(p1)'  
+        local blu `r(p2)'    
+        local gre `r(p3)'    
+        local yel `r(p4)'    
+        local pur `r(p5)'  
 
     ** OUTLINE BORDERS
     ** These outlines needs to be above the maximum of the y-axis
@@ -332,9 +330,9 @@ preserve
                 (scatteri `outer2c' , recast(line) lw(0.2) lc(gs10) fc(none) )
 
                 /// CARICOM average
-                (line lowess_14 date if iso=="`country'" , sort lc("gs8") lw(0.4) lp("-"))
-                (line rcase_av_14 date if iso=="`country'" , sort lc("`pur'*1.2") lw(0.2) lp("l"))
-                (rarea x0 rcase_av_14 date if iso=="`country'" , sort col("`pur'%40") lw(none))         
+                (line lowess_14 date if iso=="`country'" , sort lc("gs4") lw(0.4) lp("-"))
+                (line rcase_av_14 date if iso=="`country'" , sort lc("`red2'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_14 date if iso=="`country'" , sort col("`red2'%40") lw(none))         
     
                 ,
                     plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -395,7 +393,7 @@ preserve
 
 }
 
-/*
+
 ** Save to PDF file
     putpdf begin, pagesize(letter) landscape font("Calibri", 10) margin(top,1cm) margin(bottom,0.5cm) margin(left,1cm) margin(right,1cm)
 
@@ -422,7 +420,7 @@ preserve
     putpdf pagebreak
     putpdf paragraph ,  font("Calibri Light", 12)
     putpdf text ("Figure. ") , bold
-    putpdf text ("COVID-19 case rate in Antigua & Barbuda, since April 2020")
+    putpdf text ("COVID-19 case rate in Antigua & Barbuda, between April 2020 and August 2021")
 
     putpdf table fig1 = (1,1), width(100%) halign(left)    
     putpdf table fig1(.,.), border(all, nil) valign(center)
