@@ -29,6 +29,7 @@
     log using "`logpath'\caricom_slides", replace
 ** HEADER -----------------------------------------------------
 
+** Gather globals
 do "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\caricom_slides_metrics.do"
 
 

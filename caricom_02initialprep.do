@@ -30,7 +30,9 @@
 ** HEADER -----------------------------------------------------
 
 ** RUN covidprofiles_002_jhopkins.do BEFORE this algorithm
-use "`datapath'\owid_time_series_4Sep2021", clear 
+local c_date = c(current_date)
+local date_string = subinstr("`c_date'", " ", "", .)
+use "`datapath'\owid_time_series_`date_string'", clear 
 
 
 ** RESTRICT TO SELECTED COUNTRIES
@@ -126,6 +128,17 @@ replace cgroup = 6 if iso=="ARG" | iso=="BOL" | iso=="BRA" | iso=="CHL" | iso=="
 label define cgroup_ 1 "caricom" 2 "ukot" 3 "car-other" 4 "comparator" 5 "central america" 6 "south america"
 label values cgroup cgroup_ 
 
+** Fill-in missing data 
+replace new_deaths = 0 if new_deaths==. 
+replace total_deaths = 0 if total_deaths==. 
+
+** ALL COVID
+** This dataset includes the comparator countries
+** Save the cleaned and restricted dataset
+drop if cgroup==5 | cgroup==6
+save "`datapath'\all_covid", replace
+
+
 ** Keep just the Caribbean right now AND regroup
 keep if cgroup==1 | cgroup==2 | cgroup==3
 gen group = 1 if cgroup==1 | cgroup==2
@@ -133,9 +146,6 @@ replace group = 2 if cgroup==3
 label define group_ 1 "caricom" 2 "latin caribbean"
 label values group group_
 
-** Fill-in missing data 
-replace new_deaths = 0 if new_deaths==. 
-replace total_deaths = 0 if total_deaths==. 
 
 ** Save the cleaned and restricted dataset
 save "`datapath'\caricom_covid", replace
