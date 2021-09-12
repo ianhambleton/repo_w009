@@ -253,12 +253,15 @@ foreach country of local clist {
 gen x0 = 0 
 sort iso date 
 
+/*
 ** -------------------------------------------
 ** THE GRAPHIC
+** If we don't run this, the SLIDE DECK takes from 
+** caricom_03profiles.do
 ** -------------------------------------------
 
 local clist "AIA ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB CAR"
-local clist "BRB"
+///local clist "BRB"
 foreach country of local clist {
     
 preserve

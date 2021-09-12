@@ -15,6 +15,9 @@
 
     ** Set working directories: this is for DATASET and LOGFILE import and export
 
+    ** DO file path
+    local dopath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\slidedeck1\"
+
     ** DATASETS to encrypted SharePoint folder
     local datapath "X:\OneDrive - The University of the West Indies\Writing\w009\data"
 
@@ -30,7 +33,9 @@
 ** HEADER -----------------------------------------------------
 
 ** Gather globals
-do "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\caricom_slides_metrics.do"
+** We do this via 
+** slidedeck1_03_metrics.do
+do "`dopath'/slidedeck1_03_metrics.do"
 
 
 ** BULLET

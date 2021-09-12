@@ -31,7 +31,7 @@
     capture log close
     log using "`logpath'\caricom_03profiles", replace
 ** HEADER -----------------------------------------------------
-/*
+
 ** CARICOM region
 ** Data from -02initialprep- 
 use "`datapath'\caricom_covid", clear

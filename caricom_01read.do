@@ -52,78 +52,126 @@
     cd "`datapath'"
     python: full_df.to_stata('full_owid.dta')
 
-** Does data for latest data exist
-** IF NOT - stop program, and report error code
-preserve
-    use "`datapath'\full_owid", clear
-    local t1 = c(current_date)
-    gen today = d("`t1'")
-    gen yesterday = today - 1
-    format today %tdNN/DD/CCYY
-    format yesterday %tdNN/DD/CCYY
-    rename date date_orig 
-    gen date = date(date_orig, "YMD", 2020)
-    format date %tdNN/DD/CCYY
-    drop date_orig
-    order date 
-    egen today_dataset = max(date)
-    format today_dataset %tdNN/DD/CCYY
-    if (today_dataset < yesterday ) {
-        dis as error "The data for today ($S_DATE) are not yet available."
-        exit 301
-    }
-restore 
+/// ** Does data for latest data exist
+/// ** IF NOT - stop program, and report error code
+/// preserve
+///     use "`datapath'\full_owid", clear
+///     local t1 = c(current_date)
+///     gen today = d("`t1'")
+///     gen yesterday = today - 1
+///     format today %tdNN/DD/CCYY
+///     format yesterday %tdNN/DD/CCYY
+///     rename date date_orig 
+///     gen date = date(date_orig, "YMD", 2020)
+///     format date %tdNN/DD/CCYY
+///     drop date_orig
+///     order date 
+///     egen today_dataset = max(date)
+///     format today_dataset %tdNN/DD/CCYY
+///     if (today_dataset < yesterday ) {
+///         dis as error "The data for today ($S_DATE) are not yet available."
+///         exit 301
+///     }
+/// restore 
 
-** Data Source B1 - ECDC counts
-cap{
-    python: import pandas as count_csv
-    python: count_df2 = count_csv.read_csv('https://opendata.ecdc.europa.eu/covid19/casedistribution/csv')
-    cd "`datapath'"
-    python: count_df2.to_stata('count_ecdc.dta')
-    }
+/// ** Data Source B1 - ECDC counts
+/// cap{
+///     python: import pandas as count_csv
+///     python: count_df2 = count_csv.read_csv('https://opendata.ecdc.europa.eu/covid19/casedistribution/csv')
+///     cd "`datapath'"
+///     python: count_df2.to_stata('count_ecdc.dta')
+///     }
    
 ** Data Source C1 - JohnsHopkins counts
 ** Longer import time - includes US county-level data - much larger dataset
+** We import this dataset for the UKOTS
 
-*Added in on 16-Feb2021 to create a dataset for 2021 and combine with 2020
-local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
-forvalues month = 1/12 {
-   forvalues day = 1/31 {
-      local month = string(`month', "%02.0f")
-      local day = string(`day', "%02.0f")
-      local year = "2020"
-      local today = "`month'-`day'-`year'"
-      local FileName = "`URL'`today'.csv"
-      clear
-      capture import delimited "`FileName'"
-      capture confirm variable ïprovincestate
-      if _rc == 0 {
-         rename ïprovincestate provincestate
-         label variable provincestate "Province/State"
-      }
-      capture rename province_state provincestate
-      capture rename country_region countryregion
-      capture rename last_update lastupdate
-      capture rename lat latitude
-      capture rename long longitude
-      generate tempdate = "`today'"
-      capture save "`today'", replace
-   }
-}
-clear
-forvalues month = 1/12 {
-   forvalues day = 1/31 {
-      local month = string(`month', "%02.0f")
-      local day = string(`day', "%02.0f")
-      local year = "2020"
-      local today = "`month'-`day'-`year'"
-      capture append using "`today'"
-   }
-}
-save "`datapath'\jh_time_series2020", replace
+** Loading 2020 COVID surveillance data
+** This is historical
+** RAN on 12-Sep-2021
+** So commented out to speed up the daily operation
+/// local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+/// forvalues month = 1/12 {
+///    forvalues day = 1/31 {
+///       local month = string(`month', "%02.0f")
+///       local day = string(`day', "%02.0f")
+///       local year = "2020"
+///       local today = "`month'-`day'-`year'"
+///       local FileName = "`URL'`today'.csv"
+///       clear
+///       capture import delimited "`FileName'"
+///       capture confirm variable ïprovincestate
+///       if _rc == 0 {
+///          rename ïprovincestate provincestate
+///          label variable provincestate "Province/State"
+///       }
+///       capture rename province_state provincestate
+///       capture rename country_region countryregion
+///       capture rename last_update lastupdate
+///       capture rename lat latitude
+///       capture rename long longitude
+///       generate tempdate = "`today'"
+///       capture save "`today'", replace
+///    }
+/// }
+/// clear
+/// forvalues month = 1/12 {
+///    forvalues day = 1/31 {
+///       local month = string(`month', "%02.0f")
+///       local day = string(`day', "%02.0f")
+///       local year = "2020"
+///       local today = "`month'-`day'-`year'"
+///       capture append using "`today'"
+///    }
+/// }
+/// save "`datapath'\jh_time_series2020", replace
 
+
+** Loading 2021 COVID surveillance data
+** We split this into blocks to minimise the daily operation
+** Chunk: Running 2021 from JAN (01) to JUN (06)
+/// local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+/// forvalues month = 1/6 {
+///    forvalues day = 1/31 {
+///       local month = string(`month', "%02.0f")
+///       local day = string(`day', "%02.0f")
+///       local year = "2021"
+///       local today = "`month'-`day'-`year'"
+///       local FileName = "`URL'`today'.csv"
+///       clear
+///       capture import delimited "`FileName'"
+///       capture confirm variable ïprovincestate
+///       if _rc == 0 {
+///          rename ïprovincestate provincestate
+///          label variable provincestate "Province/State"
+///       }
+///       capture rename province_state provincestate
+///       capture rename country_region countryregion
+///       capture rename last_update lastupdate
+///       capture rename lat latitude
+///       capture rename long longitude
+///       generate tempdate = "`today'"
+///       capture save "`today'", replace
+///    }
+/// }
+/// clear
+/// forvalues month = 1/6 {
+///    forvalues day = 1/31 {
+///       local month = string(`month', "%02.0f")
+///       local day = string(`day', "%02.0f")
+///       local year = "2021"
+///       local today = "`month'-`day'-`year'"
+///       capture append using "`today'"
+///    }
+/// }
+/// save "`datapath'\jh_time_series2021_jan_jun", replace
+
+
+** Loading 2021 COVID surveillance data
+** We split this into blocks to minimise the daily operation
+** Chunk: Running 2021 from JUL (07) to DEC (12)
 local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
-forvalues month = 1/12 {
+forvalues month = 7/12 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -147,7 +195,7 @@ forvalues month = 1/12 {
    }
 }
 clear
-forvalues month = 1/12 {
+forvalues month = 7/12 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -156,16 +204,16 @@ forvalues month = 1/12 {
       capture append using "`today'"
    }
 }
+save "`datapath'\jh_time_series2021_jul_dec", replace
 
-** ----------------------------------------------------------------------------
-** 18-Jun-2020
-** Save a daily backup of the Johns Hopkins data
-local c_date = c(current_date)
-local date_string = subinstr("`c_date'", " ", "", .)
-save "`datapath'\jh_time_series2021", replace
-use "`datapath'\jh_time_series2021", clear 
-append using "`datapath'\jh_time_series2020"
-save "`datapath'\jh_time_series_`date_string'", replace
+
+** Join the JH files
+use "`datapath'\jh_time_series2020", clear
+append using "`datapath'\jh_time_series2021_jan_jun"
+append using "`datapath'\jh_time_series2021_jul_dec"
+save "`datapath'\jh_time_series_full", replace
+
+
 
 tempfile TCA AIA BMU CYM MSR VGB
 ** 18-jun-2020
@@ -175,7 +223,7 @@ tempfile TCA AIA BMU CYM MSR VGB
 ** re-appearance of TCA in ECDC in a later edition
 
 **TCA
- use "`datapath'\jh_time_series_`date_string'", clear 
+ use "`datapath'\jh_time_series_full", clear 
     keep if provincestate=="Turks and Caicos Islands" 
     ** Match JH format to OWID format before appending
     generate date = date(tempdate, "MDY")
@@ -197,7 +245,7 @@ tempfile TCA AIA BMU CYM MSR VGB
     save `TCA', replace
 
 **AIA
-use "`datapath'\jh_time_series_`date_string'", clear 
+use "`datapath'\jh_time_series_full", clear 
 keep if provincestate=="Anguilla" 
     ** Match JH format to OWID format before appending
     generate date = date(tempdate, "MDY")
@@ -217,7 +265,7 @@ keep if provincestate=="Anguilla"
     save `AIA', replace
 
     **BMU
- use "`datapath'\jh_time_series_`date_string'", clear 
+ use "`datapath'\jh_time_series_full", clear 
 keep if provincestate=="Bermuda"
     ** Match JH format to OWID format before appending
     generate date = date(tempdate, "MDY")
@@ -238,7 +286,7 @@ keep if provincestate=="Bermuda"
 
 
        **CYM
-        use "`datapath'\jh_time_series_`date_string'", clear 
+        use "`datapath'\jh_time_series_full", clear 
 keep if provincestate=="Cayman Islands" 
     ** Match JH format to OWID format before appending
     generate date = date(tempdate, "MDY")
@@ -258,7 +306,7 @@ keep if provincestate=="Cayman Islands"
     save `CYM', replace
 
  **MSR
-  use "`datapath'\jh_time_series_`date_string'", clear 
+  use "`datapath'\jh_time_series_full", clear 
 keep if provincestate=="Montserrat" 
     ** Match JH format to OWID format before appending
     generate date = date(tempdate, "MDY")
@@ -279,7 +327,7 @@ keep if provincestate=="Montserrat"
 
 
      **VGB
-      use "`datapath'\jh_time_series_`date_string'", clear 
+      use "`datapath'\jh_time_series_full", clear 
 keep if provincestate=="British Virgin Islands" 
     ** Match JH format to OWID format before appending
     generate date = date(tempdate, "MDY")

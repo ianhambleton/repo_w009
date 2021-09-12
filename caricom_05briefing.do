@@ -39,7 +39,6 @@
 ** -----------------------------------------
 ** Pre-Load the COVID metrics --> as Global Macros
 ** -----------------------------------------
-** qui do "`dopath'\caricom_04metrics1"
 qui do "`dopath'\caricom_04metrics2"
 rename country cname
 ** -----------------------------------------
@@ -107,6 +106,10 @@ by iso: asrol new_deaths , stat(mean) window(dweek 3) gen(deaths_av3)
 ** BY Country: Elapased time in weeks from first case
 bysort iso: egen elapsed_max = max(dweek)
 gen x0 = 0
+
+
+label define iso_num 1000 "CAR", modify
+label values iso_num iso_num
 
 
 
@@ -216,9 +219,9 @@ foreach country of local clist {
         #delimit cr
         graph export "`outputpath'/cases_`country'.png", replace width(4000)
 
-        drop c3 c4 c5
+        drop c3 c4 c5 el_*
 
-/*
+
 ** ------------------------------------------------------
 ** PDF COUNTRY REPORT
 ** ------------------------------------------------------
@@ -315,14 +318,14 @@ foreach country of local clist {
 ** FIGURE 1. OF COVID-19 trajectory
     putpdf paragraph ,  font("Calibri Light", 10)
     putpdf text ("Graph."), bold
-    putpdf text (" Cumulative cases in `cname' as of $S_DATE"), linebreak
+    putpdf text (" New cases per week in `cname' as of $S_DATE"), linebreak
     putpdf table f1 = (1,1), width(85%) border(all,nil) halign(center)
     putpdf table f1(1,1)=image("`outputpath'/cases_`country'.png")
 
 ** FIGURE 2. OF COVID-19 trajectory
     putpdf paragraph ,  font("Calibri Light", 10)
     putpdf text ("Graph."), bold
-    putpdf text (" Cumulative deaths in `cname' as of $S_DATE"), linebreak
+    putpdf text (" New deaths per week in `cname' as of $S_DATE"), linebreak
     putpdf table f2 = (1,1), width(85%) border(all,nil) halign(center)
     putpdf table f2(1,1)=image("`outputpath'/deaths_`country'.png")
 
@@ -339,11 +342,13 @@ foreach country of local clist {
     putpdf save "`webpath'/briefing_`country'", replace
 }
 
+
+
 ** -----------------------------------------------
 ** ALL BRIEFINGS IN A SINGLE PDF
 ** -----------------------------------------------
 
-*/
+
 ** ------------------------------------------------------
 ** PDF COUNTRY REPORT
 ** ------------------------------------------------------
@@ -366,7 +371,7 @@ foreach country of local clist {
     label values c4 cname_
     decode c4, gen(c5)
     local cname = c5
-    drop c3 c4 c5
+    drop c3 c4 c5 el_*
 
 
 ** TITLE, ATTRIBUTION, DATE of CREATION
@@ -460,14 +465,14 @@ foreach country of local clist {
 ** FIGURE 1. OF COVID-19 trajectory
     putpdf paragraph ,  font("Calibri Light", 10)
     putpdf text ("Graph."), bold
-    putpdf text (" Cumulative cases in `cname' as of $S_DATE"), linebreak
+    putpdf text (" New cases per week in `cname' as of $S_DATE"), linebreak
     putpdf table f1 = (1,1), width(85%) border(all,nil) halign(center)
     putpdf table f1(1,1)=image("`outputpath'/cases_`country'.png")
 
 ** FIGURE 2. OF COVID-19 trajectory
     putpdf paragraph ,  font("Calibri Light", 10)
     putpdf text ("Graph."), bold
-    putpdf text (" Cumulative deaths in `cname' as of $S_DATE"), linebreak
+    putpdf text (" New deaths per week in `cname' as of $S_DATE"), linebreak
     putpdf table f2 = (1,1), width(85%) border(all,nil) halign(center)
     putpdf table f2(1,1)=image("`outputpath'/deaths_`country'.png")
 

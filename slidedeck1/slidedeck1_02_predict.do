@@ -31,8 +31,9 @@
 
 ** ---------------------------------------------
 ** RUN THE EIGHT SCENARIOS
+** We do this now via: slideck1_00_run.do
 ** ---------------------------------------------
-do "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\caricom_05scenarios.do"
+** do "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\caricom_05scenarios.do"
 
 ** Drop X initial observation days from scenarios to recognise that the outbreak has already started
 ** Do this in collaboration with public health
@@ -93,16 +94,14 @@ replace cases = (cases/pop) * 100000 if scenario > 0
 **gen cases_scen7 = cases if scenario==7
 **gen cases_scen8 = cases if scenario==8
 
-lowess cases date if iso=="BRB" & scenario==1, bwidth(0.5) gen(cases_scen1) name(sc1) ylab(0(10)50)
-lowess cases date if iso=="BRB" & scenario==2, bwidth(0.5) gen(cases_scen2) name(sc2) ylab(0(10)50)
-lowess cases date if iso=="BRB" & scenario==3, bwidth(0.5) gen(cases_scen3) name(sc3) ylab(0(10)50)
-lowess cases date if iso=="BRB" & scenario==4, bwidth(0.5) gen(cases_scen4) name(sc4)  ylab(0(10)50)
-lowess cases date if iso=="BRB" & scenario==5, bwidth(0.5) gen(cases_scen5) name(sc5)  ylab(0(10)50)
+lowess cases date if iso=="BRB" & scenario==1, bwidth(0.5) gen(cases_scen1) name(sc1) ylab(0(20)100)
+lowess cases date if iso=="BRB" & scenario==2, bwidth(0.5) gen(cases_scen2) name(sc2) ylab(0(20)100)
+lowess cases date if iso=="BRB" & scenario==3, bwidth(0.5) gen(cases_scen3) name(sc3) ylab(0(20)100)
+lowess cases date if iso=="BRB" & scenario==4, bwidth(0.5) gen(cases_scen4) name(sc4)  ylab(0(20)100)
+lowess cases date if iso=="BRB" & scenario==5, bwidth(0.5) gen(cases_scen5) name(sc5)  ylab(0(20)100)
 
 ** Keep 2021 for graphing
 keep if date >= d(1jan2021)
-
-
 
 gen x0 = 0
 

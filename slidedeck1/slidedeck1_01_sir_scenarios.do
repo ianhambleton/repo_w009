@@ -83,12 +83,20 @@ save "`datapath'\BRB_trajectory", replace
 ** Model 8 = 75% vaccination
 ** ---------------------------------------------------
 ** Infectivity across the FIVE weeks are
+
+** scenario 1
 global wk1 = 3
 global wk2 = 1.5
 global wk3 = 0.8
 global wk4 = 0.6
 global wk5 = 0.5
 
+** scenario 2
+global wk1 = 1.75
+global wk2 = 1.4
+global wk3 = 1.1
+global wk4 = 0.8
+global wk5 = 0.5
 
 ** -------------------------------------------------------------------------
 ** MODEL PARAMETERS
