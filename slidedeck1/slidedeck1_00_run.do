@@ -33,20 +33,22 @@
 ** HEADER -----------------------------------------------------
 
 ** SIR model scenarios for Barbados modelling
-do "`dopath'/slidedeck1_01_sir_scenarios.do"
+** scenarios2 currently runs from 02_predict- 
+**do "`dopath'/slidedeck1_01_sir_scenarios.do"
+**do "`dopath'/slidedeck1_01_sir_scenarios2.do"
 
 ** Graphics of Barbados prediction
 do "`dopath'/slidedeck1_02_predict.do"
 
 ** GLobal macros for dynamic messaging in slide-deck
-** do "`dopath'/slidedeck1_03_metrics.do"
+do "`dopath'/slidedeck1_03_metrics.do"
 
 ** Graphics for slide-deck: Slide 1 (profiles)
-** do "`dopath'/slidedeck1_04_slide1.do"
+do "`dopath'/slidedeck1_04_slide1.do"
 
 ** Graphics for slide-deck: Slide 5 (Barbados models)
-** do "`dopath'/slidedeck1_05_slide5.do"
+do "`dopath'/slidedeck1_05_slide5.do"
 
 ** Building the slides - including ALL regional profiles
-** do "`dopath'/slidedeck1_06_slides.do"
+do "`dopath'/slidedeck1_06_slides.do"
 

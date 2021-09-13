@@ -250,7 +250,7 @@ foreach country of local clist {
     putpdf text ("We present the number of confirmed cases and deaths ")
     putpdf text ("1"), script(super) 
     putpdf text (" from COVID-19 infection in `cname' since the start of the outbreak, which ") 
-    putpdf text ("we measure as the number of days since the first confirmed case. We report whether thecase rate (per 100,000 people) is currently increasing or descreasing, ") 
+    putpdf text ("we measure as the number of days since the first confirmed case. We report whether the case rate (per 100,000 people) is currently increasing or decreasing, ") 
     putpdf text ("and describe the current `cname' case load compared to the `cname' outbreak peak. "),  
     putpdf text ("For more on case rates, download the associated "),  
     putpdf text ("country profile "), italic bold  
@@ -397,7 +397,7 @@ foreach country of local clist {
     putpdf text ("We present the number of confirmed cases and deaths ")
     putpdf text ("1"), script(super) 
     putpdf text (" from COVID-19 infection in `cname' since the start of the outbreak, which ") 
-    putpdf text ("we measure as the number of days since the first confirmed case. We report whether thecase rate (per 100,000 people) is currently increasing or descreasing, ") 
+    putpdf text ("we measure as the number of days since the first confirmed case. We report whether the case rate (per 100,000 people) is currently increasing or decreasing, ") 
     putpdf text ("and describe the current `cname' case load compared to the `cname' outbreak peak. "),  
     putpdf text ("For more on case rates, download the associated "),  
     putpdf text ("country profile "), italic bold  

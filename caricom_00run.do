@@ -33,7 +33,7 @@
 ** HEADER -----------------------------------------------------
 
 ** LOAD the latest data from Johns Hopkins
-** do "`dopath'/caricom_01read.do"
+do "`dopath'/caricom_01read.do"
 
 ** Initial dataset preparation: restrict to CARICOM countries
 do "`dopath'/caricom_02initialprep"

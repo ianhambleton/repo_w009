@@ -15,6 +15,9 @@
 
     ** Set working directories: this is for DATASET and LOGFILE import and export
 
+    ** DO file path
+    local dopath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\slidedeck1\"
+
     ** DATASETS to encrypted SharePoint folder
     local datapath "X:\OneDrive - The University of the West Indies\Writing\w009\data"
 
@@ -29,11 +32,10 @@
     log using "`logpath'\caricom_06predict", replace
 ** HEADER -----------------------------------------------------
 
-** ---------------------------------------------
-** RUN THE EIGHT SCENARIOS
-** We do this now via: slideck1_00_run.do
-** ---------------------------------------------
-** do "X:\OneDrive - The University of the West Indies\repo_ianhambleton\repo_w009\caricom_05scenarios.do"
+** SIR model scenarios for Barbados modelling
+**do "`dopath'/slidedeck1_01_sir_scenarios.do"
+do "`dopath'/slidedeck1_01_sir_scenarios2.do"
+
 
 ** Drop X initial observation days from scenarios to recognise that the outbreak has already started
 ** Do this in collaboration with public health
@@ -105,16 +107,16 @@ keep if date >= d(1jan2021)
 
 gen x0 = 0
 
-    ** COLORS - PURPLES for CVD
-        colorpalette sfso, red nograph
-        local list r(p) 
-        ** Age groups
-        local red1 `r(p1)'  
-        local red2 `r(p2)'    
-        local red3 `r(p3)'    
-        local red4 `r(p4)'    
-        local red5 `r(p5)'  
-        local red6 `r(p6)'
+** COLORS - PURPLES for CVD
+    colorpalette sfso, red nograph
+    local list r(p) 
+    ** Age groups
+    local red1 `r(p1)'  
+    local red2 `r(p2)'    
+    local red3 `r(p3)'    
+    local red4 `r(p4)'    
+    local red5 `r(p5)'  
+    local red6 `r(p6)'
 
 ** COLORS - W3 flat colors
     colorpalette w3 flat, nograph
@@ -162,16 +164,17 @@ gen x0 = 0
                 
 
                     xlab(
-                            22281 "1 Jan 21"
-                            22371 "1 Apr 21"
-                            22462 "1 Jul 21" 
-                            22554 "1 Oct 21" 
+                            22281 "1 Jan 2021"
+                            22340 "1 Mar 2021"
+                            22401 "1 May 2021" 
+                            22462 "1 Jul 2021"
+                            22524 "1 Sep 2021" 
                     , 
                     labs(4) notick nogrid glc(gs16))
                     xscale(noline   range(22281(10)22585)) 
-                    xtitle("Outbreak month (Jan to Oct 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
+                    xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0 10 20 30 40 50
+                    ylab(
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
@@ -210,12 +213,28 @@ gen x0 = 0
             graph export "`outputpath'/caserate_BRB_clean.png", replace width(4000) 
 
 
+** Peak prediction rate
+forval x = 1(1)5 {
+    egen peak`x' = max(cases_scen`x')
+    global peak`x'  : dis %6.0f peak`x'
+    global loc`x'  : dis %6.0f peak`x' + 5
+    global ht`x'  : dis %6.0f peak`x' + 10
+}
 
+** Projection period bar
+** We want to draw line
+gen d1 = c(current_date)
+local d1 = d1
+gen d2 = d(`d1')
+global date1 = d2
+global date2 = $date1 + $wlength
+global date3 = $date1 + ($wlength/2)
+local outer1 5 $date1  5 $date2
 
         #delimit ;
             gr twoway 
                 /// outer boxes 
-                /// (scatteri `outer1'  , recast(area) lw(0.2) lc(gs10) fc(none) )                            
+                (scatteri `outer1'  , recast(line) lw(2) lc("`red5'%40") fc  (none) )                            
                 /// (scatteri `outer2a' , recast(line) lw(0.2) lc(gs10) fc(none) )
                 /// (scatteri `outer2b' , recast(line) lw(0.2) lc(gs10) fc(none) )
                 /// (scatteri `outer2c' , recast(line) lw(0.2) lc(gs10) fc(none) )
@@ -242,40 +261,28 @@ gen x0 = 0
                     graphregion(color(gs16) ic(gs16) ilw(thin) lw(thin)) 
                     bgcolor(white) 
                     ysize(6) xsize(18)
-                
 
                     xlab(
-                            22281 "1 Jan 21"
-                            22371 "1 Apr 21"
-                            22462 "1 Jul 21" 
-                            22554 "1 Oct 21" 
+                            22281 "1 Jan 2021"
+                            22340 "1 Mar 2021"
+                            22401 "1 May 2021" 
+                            22462 "1 Jul 2021"
+                            22524 "1 Sep 2021" 
                     , 
                     labs(4) notick nogrid glc(gs16))
-                    xscale(noline range(22281(10)22585)) 
-                    xtitle("Outbreak month (Jan to Oct 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
+                    xscale(noline   range(22281(10)22585)) 
+                    xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0 10 20 30 40 50  
+                    ylab( 
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                    yscale(noline ) 
+                    yscale(noline range(0(5)${ht1})) 
                     ///ytick(0(5)50)
 
-                    text(40.5 22330 "Barbados"         ,  place(e) size(5.5) color(gs8) just(left))
-                    /// text($ypos2 $xpos0 "`date_string2'"         ,  place(e) size(5.5) color(gs0) just(left))
-
-                    /// text($ypos1 $xpos1 "CASES"                      ,  place(w) size(5) color(gs4) just(left))
-                    /// text($ypos2 $xpos1 "Total: ${m01_`country'}"    ,  place(w) size(5) color(gs8) just(left))
-                    /// text($ypos3 $xpos1 "14-day: ${m03_`country'}"   ,  place(w) size(5) color(`red2') just(left))
-
-                    /// text($ypos1 $xpos2 "DEATHS"                     ,  place(w) size(5) color(gs4) just(right))
-                    /// text($ypos2 $xpos2 "Total: ${m02_`country'}"    ,  place(w) size(5) color(gs8) just(right))
-                    /// text($ypos3 $xpos2 "14-day: ${m04_`country'}"   ,  place(w) size(5) color(`red2') just(right))
-
-                    /// text($ypos1 $xpos3 "RATE"                       ,  place(w) size(5) color(gs4) just(right))
-                    /// text($ypos2 $xpos3 "${rate5_`country'} "        ,  place(w) size(5) color(gs8) just(right))
-                    /// text($ypos3 $xpos3 "${up_`country'}"            ,  place(w) size(5) color(`red2') just(right))
-                    /// text($ypos3 $xpos3 "${down_`country'}"          ,  place(w) size(5) color(`gre') just(right))
+                    text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
+                    text(${loc1} 22550 "${peak1} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
+                    text(0 $date3 "${wlength} day" "projection"  ,  place(c) size(4.5) color(gs8) just(left))
 
 
                     legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)

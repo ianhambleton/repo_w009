@@ -99,7 +99,7 @@ local change2d = $m67caricom - $m65caricom
 local remain = $m62caricom - $m62_HTI 
 ** Remaining deaths after removing Haiti and Suriname
 local remain2 = $m62caricom - $m62_HTI - $m62_SUR 
-**Remaining deahs after countries with >200 cases
+**Remaining deaths after countries with >200 cases
 local remain3 = $m62caricom - $m62_SUR - $m62_BHS - $m62_HTI
 local remain4 = $m62caricom - $m62_JAM - $m62_GUY - $m62_BMU - $m62_TTO
     
@@ -222,6 +222,20 @@ local number2 = 0
     if $m62_TCA>200 {
         local number2 = `number2'+1
     }
+
+** Numbers with commas
+global m01caricom_wc : dis %9.0fc $m01caricom
+global m02caricom_wc : dis %9.0fc $m02caricom
+global m60caricom_wc : dis %9.0fc $m60caricom
+global m61caricom_wc : dis %9.0fc $m61caricom
+global m62caricom_wc : dis %9.0fc $m62caricom
+global m63caricom_wc : dis %9.0fc $m63caricom
+global m64caricom_wc : dis %9.0fc $m64caricom
+global m65caricom_wc : dis %9.0fc $m65caricom
+global m66caricom_wc : dis %9.0fc $m66caricom
+global m67caricom_wc : dis %9.0fc $m67caricom
+
+
 ** BULLET
 local bullet = uchar(8226)
 ** ------------------------------------------------------
@@ -247,205 +261,310 @@ local bullet = uchar(8226)
 ** INTRODUCTION
     putpdf paragraph ,  font("Calibri Light", 10)
     putpdf text ("Weekly Summary for the week ending `day' $S_DATE. ") , bold linebreak
-    putpdf text ("In the week to `day' $S_DATE among the 20 CARICOM members and associate members, there have been ")
-    putpdf text ("$m62caricom "),  
-    putpdf text ("new confirmed cases (compared to `change1' last week, and `change2' two weeks ago) "),  
-    putpdf text ("and $m63caricom new confirmed deaths (compared to `change1d' last week, and `change2d' two weeks ago). "),  
-    putpdf text ("There were `number2' countries with over 200 cases: "), linebreak
+    putpdf text ("In the week to `day' $S_DATE among the 20 CARICOM members and associate members: "), linebreak
     putpdf paragraph ,  font("Calibri Light", 10) indent(left, 35pt)
-    **exclude top hotspot highlighted above
-    if $m62_AIA > 200 {
-        putpdf text ("`bullet' Anguilla ($m62_AIA cases) "), linebreak 
-    }
-    if $m62_ATG > 200 {
-        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG cases) "), linebreak 
-    }
-    if $m62_BHS > 200 {
-        putpdf text ("`bullet' The Bahamas ($m62_BHS cases) "), linebreak 
-    }
-    if $m62_BRB > 200 {
-        putpdf text ("`bullet' Barbados ($m62_BRB cases) "), linebreak 
-    }
-    if $m62_BLZ > 200 {
-        putpdf text ("`bullet' Belize ($m62_BLZ cases) "), linebreak
-   }
-    if $m62_BMU > 200 {
-        putpdf text ("`bullet' Bermuda ($m62_BMU cases) "), linebreak
-    }
-    if $m62_VGB > 200 {
-        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB case) "), linebreak
-    }
-    if $m62_CYM > 200 {
-        putpdf text ("`bullet' Cayman Islands ($m62_CYM cases) "), linebreak
-    }
-    if $m62_DMA > 200 {
-        putpdf text ("`bullet' Dominica ($m62_DMA cases) "), linebreak
-    }
-    if $m62_GRD > 200 {
-        putpdf text ("`bullet' Grenada ($m62_GRD cases) "), linebreak
-    }
-    if $m62_GUY > 200 {
-        putpdf text ("`bullet' Guyana ($m62_GUY cases) "), linebreak
-    }
-    if $m62_HTI > 200 {
-    putpdf text ("`bullet' Haiti ($m62_HTI cases) "), linebreak
-    }
-    if $m62_JAM > 200 {
-        putpdf text ("`bullet' Jamaica ($m62_JAM cases) "), linebreak
-    }
-    if $m62_MSR > 200 {
-        putpdf text ("`bullet' Montserrat ($m62_MSR cases) "), linebreak
-    }
-    if $m62_KNA > 200 {
-        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA cases) "), linebreak
-    }
-    if $m62_LCA > 200 {
-        putpdf text ("`bullet' St Lucia ($m62_LCA cases) "), linebreak
-    }
-    if $m62_VCT > 200 {
-        putpdf text ("`bullet' St Vincent and the Grenadines ($m62_VCT cases) "), linebreak
-    }
-    if $m62_SUR > 200 {
-        putpdf text ("`bullet' Suriname ($m62_SUR cases) "), linebreak
-    }
-    if $m62_TTO > 200 {
-        putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO cases) "), linebreak
-    }
-    if $m62_TCA > 200 {
-        putpdf text ("`bullet' Turks and Caicos Islands ($m62_TCA cases) "), linebreak
-    }
-    putpdf text (" "), linebreak  
-    putpdf paragraph ,  font("Calibri Light", 10)
-    putpdf text ("The remaining `remain4' cases were reported in `number' countries: "), linebreak  
-    putpdf text (" "), linebreak  
-    putpdf paragraph ,  font("Calibri Light", 10) indent(left, 35pt)
-    **exclude countries with > 200 cases
-    if $m62_AIA == 1 {
-        putpdf text ("`bullet' Anguilla ($m62_AIA case)"), linebreak 
-    }
-    if $m62_AIA > 1 {
-        putpdf text ("`bullet' Anguilla ($m62_AIA cases) "), linebreak 
-    }
-    if $m62_ATG == 1 {
-        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG case) "), linebreak 
-    }
-    if $m62_ATG > 1 {
-        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG cases) "), linebreak 
-    }
-    if $m62_BHS == 1 {
-        putpdf text ("`bullet' The Bahamas ($m62_BHS case) "), linebreak 
-    }
-    if $m62_BHS > 1 {
-        putpdf text ("`bullet' The Bahamas ($m62_BHS cases) "), linebreak 
-    }
-    if $m62_BRB == 1 {
-        putpdf text ("`bullet' Barbados ($m62_BRB case) "), linebreak 
-    }
-    if $m62_BRB > 1 {
-        putpdf text ("`bullet' Barbados ($m62_BRB cases) "), linebreak 
-    }
-    if $m62_BLZ == 1 {
-        putpdf text ("`bullet' Belize ($m62_BLZ case) "), linebreak
-    }
-    if $m62_BLZ > 1 {
-        putpdf text ("`bullet' Belize ($m62_BLZ cases) "), linebreak
-    }
-    **if $m62_BMU == 1 {
-    **    putpdf text ("`bullet' Bermuda ($m62_BMU case) "), linebreak
-    **}
-    **if $m62_BMU > 1 {
-    **    putpdf text ("`bullet' Bermuda ($m62_BMU cases) "), linebreak
-    **}
-    if $m62_VGB == 1 {
-        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB case) "), linebreak
-    }
-    if $m62_VGB > 1 {
-        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB cases) "), linebreak
-    }
-    if $m62_CYM == 1 {
-        putpdf text ("`bullet' Cayman Islands ($m62_CYM case) "), linebreak
-    }
-    if $m62_CYM > 1 {
-        putpdf text ("`bullet' Cayman Islands ($m62_CYM cases) "), linebreak
-    }
-    if $m62_DMA == 1 {
-        putpdf text ("`bullet' Dominica ($m62_DMA case) "), linebreak
-    }
-    if $m62_DMA > 1 {
-        putpdf text ("`bullet' Dominica ($m62_DMA cases) "), linebreak
-    }
-    if $m62_GRD == 1 {
-        putpdf text ("`bullet' Grenada ($m62_GRD case) "), linebreak
-    }
-    if $m62_GRD > 1 {
-        putpdf text ("`bullet' Grenada ($m62_GRD cases) "), linebreak
-    }
-   ** if $m62_GUY == 1 {
-   **   putpdf text ("`bullet' Guyana ($m62_GUY case) "), linebreak
-    **}
-   **  if $m62_GUY > 1 {
-   **   putpdf text ("`bullet' Guyana ($m62_GUY cases) "), linebreak
-    **}
-    if $m62_HTI == 1 {
-        putpdf text ("`bullet' Haiti ($m62_HTI case) "), linebreak
-    }
-    if $m62_HTI > 1 {
-        putpdf text ("`bullet' Haiti ($m62_HTI cases) "), linebreak
-    }
-**    if $m62_JAM == 1 {
-**        putpdf text ("`bullet' Jamaica ($m62_JAM case) "), linebreak
-**     }
-**    if $m62_JAM > 1 {
-**       putpdf text ("`bullet' Jamaica ($m62_JAM cases) "), linebreak
-**      }
-    if $m62_MSR == 1 {
-        putpdf text ("`bullet' Montserrat ($m62_MSR case) "), linebreak
-    }
-    if $m62_MSR > 1 {
-        putpdf text ("`bullet' Montserrat ($m62_MSR cases) "), linebreak
-    }
-    if $m62_KNA == 1 {
-        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA case) "), linebreak
-    }
-    if $m62_KNA > 1 {
-        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA cases) "), linebreak
-    }
-    if $m62_LCA == 1 {
-        putpdf text ("`bullet' St Lucia ($m62_LCA case) "), linebreak
-    }
-    if $m62_LCA > 1 {
-        putpdf text ("`bullet' St Lucia ($m62_LCA cases) "), linebreak
-    }
-    if $m62_VCT == 1 {
-        putpdf text ("`bullet' St Vincent and thee Grenadines ($m62_VCT case) "), linebreak
-    }
-    if $m62_VCT > 1 {
-        putpdf text ("`bullet' St Vincent and the Grenadines ($m62_VCT cases) "), linebreak
-    }
-    if $m62_SUR == 1 {
-        putpdf text ("`bullet' Suriname ($m62_SUR case) "), linebreak
-    }
-    if $m62_SUR > 1 {
-        putpdf text ("`bullet' Suriname ($m62_SUR cases) "), linebreak
-    }
-    **if $m62_TTO == 1 {
-    **    putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO case) "), linebreak
-    **}
-    **if $m62_TTO > 1 {
-    **   putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO cases) "), linebreak
-    **}
-    if $m62_TCA == 1 {
-     putpdf text ("`bullet' Turks and Caicos islands ($m62_TCA case) "), linebreak
-    }
-    if $m62_TCA > 1 {
-     putpdf text ("`bullet' Turks and Caicos Islands ($m62_TCA cases) "), linebreak
-      }
-    putpdf text (" "), linebreak  
+    putpdf text ("`bullet' There have been "),
+    putpdf text ("$m62caricom "), 
+    putpdf text ("new confirmed cases (compared to `change1' last week, and `change2' two weeks ago) "), linebreak  
+    putpdf text ("`bullet' There have been $m63caricom new confirmed deaths (compared to `change1d' last week, and `change2d' two weeks ago). "), linebreak 
+    putpdf text ("`bullet' In the past 24 hours there have been $m60caricom new confirmed cases and $m61caricom new confirmed deaths. "), linebreak
+
     putpdf paragraph ,  font("Calibri Light", 10) 
-    putpdf text ("In the past 24 hours there have been $m60caricom new confirmed cases and $m61caricom new confirmed deaths. "), 
-    **putpdf text ("Belize ($m01_BLZ confirmed cases, $m62_BLZ in the past week) ")
-    **putpdf text ("and Jamaica ($m01_JAM confirmed cases, $m62_JAM in the past week)")
-    **putpdf text ("are the current Caribbean hotspots.")       
+    putpdf text ("The numbers of cases and deaths in the past week in the 20 CARICOM member states were: "), linebreak
+
+    putpdf paragraph ,  font("Calibri Light", 10) indent(left, 35pt)
+    ** Anguilla
+    if $m62_AIA!=1 & $m63_AIA!=1 {
+        putpdf text ("`bullet' Anguilla ($m62_AIA cases, $m63_AIA deaths) "), linebreak 
+    }
+    else if $m62_AIA!=1 & $m63_AIA==1 {
+        putpdf text ("`bullet' Anguilla ($m62_AIA cases, $m63_AIA death) "), linebreak 
+    }
+    else if $m62_AIA==1 & $m63_AIA!=1 {
+        putpdf text ("`bullet' Anguilla ($m62_AIA case, $m63_AIA deaths) "), linebreak 
+    }
+    else if $m62_AIA==1 & $m63_AIA==1 {
+        putpdf text ("`bullet' Anguilla ($m62_AIA case, $m63_AIA death) "), linebreak 
+    }
+
+    ** Antigua and Barbuda
+    if $m62_ATG!=1 & $m63_ATG!=1 {
+        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG cases, $m63_ATG deaths) "), linebreak 
+    }
+    else if $m62_ATG!=1 & $m63_ATG==1 {
+        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG cases, $m63_ATG death) "), linebreak 
+    }
+    else if $m62_ATG==1 & $m63_ATG!=1 {
+        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG case, $m63_ATG deaths) "), linebreak 
+    }
+    else if $m62_ATG==1 & $m63_ATG==1 {
+        putpdf text ("`bullet' Antigua and Barbuda ($m62_ATG case, $m63_ATG death) "), linebreak 
+    }
+
+    ** The Bahamas
+    if $m62_BHS!=1 & $m63_BHS!=1 {
+        putpdf text ("`bullet' The Bahamas ($m62_BHS cases, $m63_BHS deaths) "), linebreak 
+    }
+    else if $m62_BHS!=1 & $m63_BHS==1 {
+        putpdf text ("`bullet' The Bahamas ($m62_BHS cases, $m63_BHS death) "), linebreak 
+    }
+    else if $m62_BHS==1 & $m63_BHS!=1 {
+        putpdf text ("`bullet' The Bahamas ($m62_BHS case, $m63_BHS deaths) "), linebreak 
+    }
+    else if $m62_BHS==1 & $m63_BHS==1 {
+        putpdf text ("`bullet' The Bahamas ($m62_BHS case, $m63_BHS death) "), linebreak 
+    }
+
+    ** Barbados
+    if $m62_BRB!=1 & $m63_BRB!=1 {
+        putpdf text ("`bullet' Barbados ($m62_BRB cases, $m63_BRB deaths) "), linebreak 
+    }
+    else if $m62_BRB!=1 & $m63_BRB==1 {
+        putpdf text ("`bullet' Barbados ($m62_BRB cases, $m63_BRB death) "), linebreak 
+    }
+    else if $m62_BRB==1 & $m63_BRB!=1 {
+        putpdf text ("`bullet' Barbados ($m62_BRB case, $m63_BRB deaths) "), linebreak 
+    }
+    else if $m62_BRB==1 & $m63_BRB==1 {
+        putpdf text ("`bullet' Barbados ($m62_BRB case, $m63_BRB death) "), linebreak 
+    }
+
+    ** Belize
+    if $m62_BLZ!=1 & $m63_BLZ!=1 {
+        putpdf text ("`bullet' Belize ($m62_BLZ cases, $m63_BLZ deaths) "), linebreak 
+    }
+    else if $m62_BLZ!=1 & $m63_BLZ==1 {
+        putpdf text ("`bullet' Belize ($m62_BLZ cases, $m63_BLZ death) "), linebreak 
+    }
+    else if $m62_BLZ==1 & $m63_BLZ!=1 {
+        putpdf text ("`bullet' Belize ($m62_BLZ case, $m63_BLZ deaths) "), linebreak 
+    }
+    else if $m62_BLZ==1 & $m63_BLZ==1 {
+        putpdf text ("`bullet' Belize ($m62_BLZ case, $m63_BLZ death) "), linebreak 
+    }
+
+    ** Bermuda
+    if $m62_BMU!=1 & $m63_BMU!=1 {
+        putpdf text ("`bullet' Bermuda ($m62_BMU cases, $m63_BMU deaths) "), linebreak 
+    }
+    else if $m62_BMU!=1 & $m63_BMU==1 {
+        putpdf text ("`bullet' Bermuda ($m62_BMU cases, $m63_BMU death) "), linebreak 
+    }
+    else if $m62_BMU==1 & $m63_BMU!=1 {
+        putpdf text ("`bullet' Bermuda ($m62_BMU case, $m63_BMU deaths) "), linebreak 
+    }
+    else if $m62_BMU==1 & $m63_BMU==1 {
+        putpdf text ("`bullet' Bermuda ($m62_BMU case, $m63_BMU death) "), linebreak 
+    }
+
+    ** The British Virgin Islands
+    if $m62_VGB!=1 & $m63_VGB!=1 {
+        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB cases, $m63_VGB deaths) "), linebreak 
+    }
+    else if $m62_VGB!=1 & $m63_VGB==1 {
+        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB cases, $m63_VGB death) "), linebreak 
+    }
+    else if $m62_VGB==1 & $m63_VGB!=1 {
+        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB case, $m63_VGB deaths) "), linebreak 
+    }
+    else if $m62_VGB==1 & $m63_VGB==1 {
+        putpdf text ("`bullet' The British Virgin Islands ($m62_VGB case, $m63_VGB death) "), linebreak 
+    }
+
+
+    ** Cayman Islands
+    if $m62_CYM!=1 & $m63_CYM!=1 {
+        putpdf text ("`bullet' Cayman Islands ($m62_CYM cases, $m63_CYM deaths) "), linebreak 
+    }
+    else if $m62_CYM!=1 & $m63_CYM==1 {
+        putpdf text ("`bullet' Cayman Islands ($m62_CYM cases, $m63_CYM death) "), linebreak 
+    }
+    else if $m62_CYM==1 & $m63_CYM!=1 {
+        putpdf text ("`bullet' Cayman Islands ($m62_CYM case, $m63_CYM deaths) "), linebreak 
+    }
+    else if $m62_CYM==1 & $m63_CYM==1 {
+        putpdf text ("`bullet' Cayman Islands ($m62_CYM case, $m63_CYM death) "), linebreak 
+    }
+
+
+    ** Dominica
+    if $m62_DMA!=1 & $m63_DMA!=1 {
+        putpdf text ("`bullet' Dominica ($m62_DMA cases, $m63_DMA deaths) "), linebreak 
+    }
+    else if $m62_DMA!=1 & $m63_DMA==1 {
+        putpdf text ("`bullet' Dominica ($m62_DMA cases, $m63_DMA death) "), linebreak 
+    }
+    else if $m62_DMA==1 & $m63_DMA!=1 {
+        putpdf text ("`bullet' Dominica ($m62_DMA case, $m63_DMA deaths) "), linebreak 
+    }
+    else if $m62_DMA==1 & $m63_DMA==1 {
+        putpdf text ("`bullet' Dominica ($m62_DMA case, $m63_DMA death) "), linebreak 
+    }
+
+
+
+    ** Grenada
+    if $m62_GRD!=1 & $m63_GRD!=1 {
+        putpdf text ("`bullet' Grenada ($m62_GRD cases, $m63_GRD deaths) "), linebreak 
+    }
+    else if $m62_GRD!=1 & $m63_GRD==1 {
+        putpdf text ("`bullet' Grenada ($m62_GRD cases, $m63_GRD death) "), linebreak 
+    }
+    else if $m62_GRD==1 & $m63_GRD!=1 {
+        putpdf text ("`bullet' Grenada ($m62_GRD case, $m63_GRD deaths) "), linebreak 
+    }
+    else if $m62_GRD==1 & $m63_GRD==1 {
+        putpdf text ("`bullet' Grenada ($m62_GRD case, $m63_GRD death) "), linebreak 
+    }
+
+    ** Guyana
+    if $m62_GUY!=1 & $m63_GUY!=1 {
+        putpdf text ("`bullet' Guyana ($m62_GUY cases, $m63_GUY deaths) "), linebreak 
+    }
+    else if $m62_GUY!=1 & $m63_GUY==1 {
+        putpdf text ("`bullet' Guyana ($m62_GUY cases, $m63_GUY death) "), linebreak 
+    }
+    else if $m62_GUY==1 & $m63_GUY!=1 {
+        putpdf text ("`bullet' Guyana ($m62_GUY case, $m63_GUY deaths) "), linebreak 
+    }
+    else if $m62_GUY==1 & $m63_GUY==1 {
+        putpdf text ("`bullet' Guyana ($m62_GUY case, $m63_GUY death) "), linebreak 
+    }
+
+
+    ** Haiti
+    if $m62_HTI!=1 & $m63_HTI!=1 {
+        putpdf text ("`bullet' Haiti ($m62_HTI cases, $m63_HTI deaths) "), linebreak 
+    }
+    else if $m62_HTI!=1 & $m63_HTI==1 {
+        putpdf text ("`bullet' Haiti ($m62_HTI cases, $m63_HTI death) "), linebreak 
+    }
+    else if $m62_HTI==1 & $m63_HTI!=1 {
+        putpdf text ("`bullet' Haiti ($m62_HTI case, $m63_HTI deaths) "), linebreak 
+    }
+    else if $m62_HTI==1 & $m63_HTI==1 {
+        putpdf text ("`bullet' Haiti ($m62_HTI case, $m63_HTI death) "), linebreak 
+    }
+
+
+    ** Jamaica
+    if $m62_JAM!=1 & $m63_JAM!=1 {
+        putpdf text ("`bullet' Jamaica ($m62_JAM cases, $m63_JAM deaths) "), linebreak 
+    }
+    else if $m62_JAM!=1 & $m63_JAM==1 {
+        putpdf text ("`bullet' Jamaica ($m62_JAM cases, $m63_JAM death) "), linebreak 
+    }
+    else if $m62_JAM==1 & $m63_JAM!=1 {
+        putpdf text ("`bullet' Jamaica ($m62_JAM case, $m63_JAM deaths) "), linebreak 
+    }
+    else if $m62_JAM==1 & $m63_JAM==1 {
+        putpdf text ("`bullet' Jamaica ($m62_JAM case, $m63_JAM death) "), linebreak 
+    }
+
+    ** Montserrat
+    if $m62_MSR!=1 & $m63_MSR!=1 {
+        putpdf text ("`bullet' Montserrat ($m62_MSR cases, $m63_MSR deaths) "), linebreak 
+    }
+    else if $m62_MSR!=1 & $m63_MSR==1 {
+        putpdf text ("`bullet' Montserrat ($m62_MSR cases, $m63_MSR death) "), linebreak 
+    }
+    else if $m62_MSR==1 & $m63_MSR!=1 {
+        putpdf text ("`bullet' Montserrat ($m62_MSR case, $m63_MSR deaths) "), linebreak 
+    }
+    else if $m62_MSR==1 & $m63_MSR==1 {
+        putpdf text ("`bullet' Montserrat ($m62_MSR case, $m63_MSR death) "), linebreak 
+    }
+
+
+    ** St Kitts and Nevis
+    if $m62_KNA!=1 & $m63_KNA!=1 {
+        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA cases, $m63_KNA deaths) "), linebreak 
+    }
+    else if $m62_KNA!=1 & $m63_KNA==1 {
+        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA cases, $m63_KNA death) "), linebreak 
+    }
+    else if $m62_KNA==1 & $m63_KNA!=1 {
+        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA case, $m63_KNA deaths) "), linebreak 
+    }
+    else if $m62_KNA==1 & $m63_KNA==1 {
+        putpdf text ("`bullet' St Kitts and Nevis ($m62_KNA case, $m63_KNA death) "), linebreak 
+    }
+
+
+    ** St Lucia
+    if $m62_LCA!=1 & $m63_LCA!=1 {
+        putpdf text ("`bullet' St Lucia ($m62_LCA cases, $m63_LCA deaths) "), linebreak 
+    }
+    else if $m62_LCA!=1 & $m63_LCA==1 {
+        putpdf text ("`bullet' St Lucia ($m62_LCA cases, $m63_LCA death) "), linebreak 
+    }
+    else if $m62_LCA==1 & $m63_LCA!=1 {
+        putpdf text ("`bullet' St Lucia ($m62_LCA case, $m63_LCA deaths) "), linebreak 
+    }
+    else if $m62_LCA==1 & $m63_LCA==1 {
+        putpdf text ("`bullet' St Lucia ($m62_LCA case, $m63_LCA death) "), linebreak 
+    }
+
+
+    ** St Vincent and the Grenadines
+    if $m62_VCT!=1 & $m63_VCT!=1 {
+        putpdf text ("`bullet' St Vincent and the Grenadines ($m62_VCT cases, $m63_VCT deaths) "), linebreak 
+    }
+    else if $m62_VCT!=1 & $m63_VCT==1 {
+        putpdf text ("`bullet' St Vincent and the Grenadines ($m62_VCT cases, $m63_VCT death) "), linebreak 
+    }
+    else if $m62_VCT==1 & $m63_VCT!=1 {
+        putpdf text ("`bullet' St Vincent and the Grenadines ($m62_VCT case, $m63_VCT deaths) "), linebreak 
+    }
+    else if $m62_VCT==1 & $m63_VCT==1 {
+        putpdf text ("`bullet' St Vincent and the Grenadines ($m62_VCT case, $m63_VCT death) "), linebreak 
+    }
+
+
+    ** Suriname
+    if $m62_SUR!=1 & $m63_SUR!=1 {
+        putpdf text ("`bullet' Suriname ($m62_SUR cases, $m63_SUR deaths) "), linebreak 
+    }
+    else if $m62_SUR!=1 & $m63_SUR==1 {
+        putpdf text ("`bullet' Suriname ($m62_SUR cases, $m63_SUR death) "), linebreak 
+    }
+    else if $m62_SUR==1 & $m63_SUR!=1 {
+        putpdf text ("`bullet' Suriname ($m62_SUR case, $m63_SUR deaths) "), linebreak 
+    }
+    else if $m62_SUR==1 & $m63_SUR==1 {
+        putpdf text ("`bullet' Suriname ($m62_SUR case, $m63_SUR death) "), linebreak 
+    }
+
+
+    ** Trinidad and Tobago
+    if $m62_TTO!=1 & $m63_TTO!=1 {
+        putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO cases, $m63_TTO deaths) "), linebreak 
+    }
+    else if $m62_TTO!=1 & $m63_TTO==1 {
+        putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO cases, $m63_TTO death) "), linebreak 
+    }
+    else if $m62_TTO==1 & $m63_TTO!=1 {
+        putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO case, $m63_TTO deaths) "), linebreak 
+    }
+    else if $m62_TTO==1 & $m63_TTO==1 {
+        putpdf text ("`bullet' Trinidad and Tobago ($m62_TTO case, $m63_TTO death) "), linebreak 
+    }
+
+
+    ** Turks and Caicos Islands
+    if $m62_TCA!=1 & $m63_TCA!=1 {
+        putpdf text ("`bullet' Turks and Caicos Islands ($m62_TCA cases, $m63_TCA deaths) "), linebreak 
+    }
+    else if $m62_TCA!=1 & $m63_TCA==1 {
+        putpdf text ("`bullet' Turks and Caicos Islands ($m62_TCA cases, $m63_TCA death) "), linebreak 
+    }
+    else if $m62_TCA==1 & $m63_TCA!=1 {
+        putpdf text ("`bullet' Turks and Caicos Islands ($m62_TCA case, $m63_TCA deaths) "), linebreak 
+    }
+    else if $m62_TCA==1 & $m63_TCA==1 {
+        putpdf text ("`bullet' Turks and Caicos Islands ($m62_TCA case, $m63_TCA death) "), linebreak 
+    }
+
 ** Save the PDF
     local c_date = c(current_date)
     local date_string = subinstr("`c_date'", " ", "", .)
