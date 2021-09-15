@@ -131,11 +131,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -200,11 +200,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -269,11 +269,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -339,11 +339,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -408,11 +408,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -477,11 +477,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -551,11 +551,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -631,11 +631,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -714,11 +714,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -801,11 +801,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -893,11 +893,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -991,11 +991,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -1065,11 +1065,11 @@ sort iso date
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)50   
+                ylab(0(10)60   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)50)
+                ytick(0(5)60)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 

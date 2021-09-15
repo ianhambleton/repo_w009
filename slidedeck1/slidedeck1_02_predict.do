@@ -174,12 +174,12 @@ gen x0 = 0
                     xscale(noline   range(22281(10)22585)) 
                     xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(
+                    ylab(0(10)60
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline) 
-                    ///ytick(0(5)50)
+                    ytick(0(5)60)
 
                     text(40.5 22330 "Barbados"         ,  place(e) size(5.5) color(gs8) just(left))
                     /// text($ypos2 $xpos0 "`date_string2'"         ,  place(e) size(5.5) color(gs0) just(left))
@@ -273,12 +273,12 @@ local outer1 5 $date1  5 $date2
                     xscale(noline   range(22281(10)22585)) 
                     xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab( 
+                    ylab(0(10)60 
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline range(0(5)${ht1})) 
-                    ///ytick(0(5)50)
+                    ytick(0(5)60)
 
                     text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
                     text(${loc1} 22550 "${peak1} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
@@ -288,11 +288,11 @@ local outer1 5 $date1  5 $date2
                     legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                     region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
                     symysize(5) symxsize(7)
-                    order(4 5 6 7) 
-                    lab(4 "0-10%")
-                    lab(5 "11-25%")
-                    lab(6 "26-50%")
-                    lab(7 "51-75%")
+                    order(5 6 7 8) 
+                    lab(5 "0-10% vaccination")
+                    lab(6 "11-25%")
+                    lab(7 "26-50%")
+                    lab(8 "51-75%")
                     )
                     name(predicted_BRB) 
                     ;
