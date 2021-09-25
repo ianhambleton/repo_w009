@@ -441,7 +441,6 @@ preserve
 }
 
 
-*/
 
 ** COMPLETE SET FOR CARICOM
 ** SINGLE PAGE PDF

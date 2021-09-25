@@ -98,6 +98,13 @@ global wk3 = 1.1
 global wk4 = 0.8
 global wk5 = 0.5
 
+** scenario 3 (25-Sep-2021)
+global wk1 = 1.4
+global wk2 = 1.2
+global wk3 = 1.1
+global wk4 = 0.8
+global wk5 = 0.5
+
 ** wlength: Length of model window
 **      w1: Period 1 
 **      p2: Period 2 
