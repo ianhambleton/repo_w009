@@ -27,6 +27,9 @@
     ** REPORTS and Other outputs
     local outputpath "X:\OneDrive - The University of the West Indies\Writing\w009\outputs"
 
+    ** ianhambleton.com: WEBSITE outputs
+    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton\static\uploads"
+
     ** Close any open log file and open a new log file
     capture log close
     log using "`logpath'\caricom_slides", replace
@@ -1342,8 +1345,9 @@ putpdf pagebreak
     putpdf table t1(2,1)=("given day does not necessarily represent the actual number on that date. "), italic append halign(left)
     putpdf table t1(2,1)=("This is because of the reporting chain that exists between a new case/death and its inclusion in statistics. "), italic append halign(left)
 
-*/
+
 ** Save the PDF
     local c_date = c(current_date)
     local date_string = subinstr("`c_date'", " ", "", .)
     putpdf save "`outputpath'/COVID-slides-`date_string'", replace
+    putpdf save "`webpath'/COVID-slides-01", replace,
