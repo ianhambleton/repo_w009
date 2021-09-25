@@ -1349,5 +1349,5 @@ putpdf pagebreak
 ** Save the PDF
     local c_date = c(current_date)
     local date_string = subinstr("`c_date'", " ", "", .)
-    putpdf save "`outputpath'/COVID-slides-`date_string'", replace
+    * putpdf save "`outputpath'/COVID-slides-`date_string'", replace
     putpdf save "`webpath'/COVID-slides-01", replace,
