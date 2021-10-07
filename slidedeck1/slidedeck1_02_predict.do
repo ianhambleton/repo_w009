@@ -33,8 +33,9 @@
 ** HEADER -----------------------------------------------------
 
 ** SIR model scenarios for Barbados modelling
-**do "`dopath'/slidedeck1_01_sir_scenarios.do"
-do "`dopath'/slidedeck1_01_sir_scenarios2.do"
+** do "`dopath'/slidedeck1_01_sir_scenarios.do"
+** do "`dopath'/slidedeck1_01_sir_scenarios2.do"
+do "`dopath'/slidedeck1_01_sir_scenarios3.do"
 
 
 ** Drop X initial observation days from scenarios to recognise that the outbreak has already started
@@ -174,12 +175,12 @@ gen x0 = 0
                     xscale(noline   range(22281(10)22585)) 
                     xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0(10)60
+                    ylab(0(25)150 
                     ,
-                    labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
+                    labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline) 
-                    ytick(0(5)60)
+                    ytick(0(25)150)
 
                     text(40.5 22330 "Barbados"         ,  place(e) size(5.5) color(gs8) just(left))
                     /// text($ypos2 $xpos0 "`date_string2'"         ,  place(e) size(5.5) color(gs0) just(left))
@@ -273,12 +274,12 @@ local outer1 5 $date1  5 $date2
                     xscale(noline   range(22281(10)22585)) 
                     xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0(10)60 
+                    ylab(0(25)150 
                     ,
-                    labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
+                    labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline range(0(5)${ht1})) 
-                    ytick(0(5)60)
+                    ytick(0(25)150)
 
                     text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
                     text(${loc1} 22550 "${peak1} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
