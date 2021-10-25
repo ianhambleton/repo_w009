@@ -84,6 +84,7 @@ gen x0 = 0
 sort iso date
 
 
+
 ** SURINAME
     #delimit ;
         gr twoway             
@@ -125,6 +126,7 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
@@ -194,6 +196,7 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
@@ -263,6 +266,7 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
@@ -333,6 +337,7 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
@@ -402,6 +407,7 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
@@ -471,6 +477,7 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
@@ -498,6 +505,7 @@ sort iso date
                 ;
         #delimit cr
         graph export "`outputpath'/slide1F.png", replace width(4000) 
+
 
 
 ** SURINAME - to now
@@ -528,8 +536,8 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`yel'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`yel'%45") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%45") lw(none))
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
                 graphregion(color(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -545,17 +553,18 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -572,6 +581,7 @@ sort iso date
                 ;
         #delimit cr
         graph export "`outputpath'/slide1G.png", replace width(4000) 
+
 
 
 ** SURINAME + JAMAICA - to now
@@ -602,12 +612,12 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`blu'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`blu'%45") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%45") lw(none))
 
 
             ,
@@ -625,17 +635,19 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
+
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -682,16 +694,16 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(3aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`gre'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`gre'%45") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%45") lw(none))
 
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -708,17 +720,18 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -765,20 +778,20 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`gre'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`gre'%10") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%10") lw(none))
 
             // BAHAMAS to now
-            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`red'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`red'%45") lw(none))
+            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`red'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`red'%45") lw(none))
 
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -795,17 +808,18 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -853,24 +867,24 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%45") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`gre'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`gre'%10") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%10") lw(none))
 
             // BAHAMAS to now
-            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`red'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`red'%10") lw(none))
+            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`red'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`red'%10") lw(none))
 
             // BARBADOS to now
-            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`ora'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`ora'%45") lw(none))
+            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`ora'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`ora'%45") lw(none))
 
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -887,17 +901,18 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -946,28 +961,28 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`gre'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`gre'%10") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%10") lw(none))
 
             // BAHAMAS to now
-            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`red'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`red'%10") lw(none))
+            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`red'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`red'%10") lw(none))
 
             // BARBADOS to now
-            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`ora'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`ora'%10") lw(none))
+            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`ora'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`ora'%10") lw(none))
 
             // TRINIDAD to now
-            (line rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(1oct2021), sort lc("`pur'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(1oct2021)  , sort col("`pur'%45") lw(none))
+            (line rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`pur'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`pur'%45") lw(none))
 
 
             ,
@@ -985,17 +1000,18 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
@@ -1059,17 +1075,18 @@ sort iso date
                         22371 "1 Apr 21"
                         22462 "1 Jul 21"
                         22554 "1 Oct 21" 
+                        22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
                 xscale(noline) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
-                ylab(0(10)60   
+                ylab(0(20)160   
                 ,
                 labs(3) nogrid glc(gs16) angle(0) format(%9.0f))
                 ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                ytick(0(5)60)
+                ytick(0(20)160)
 
                 legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                 region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 

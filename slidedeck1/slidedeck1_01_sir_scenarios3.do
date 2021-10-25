@@ -118,7 +118,7 @@ global wk5 = 0.5
 **      p3: Period 3 
 **      p4: Period 4 
 **      p5: Perpod 5 
-global wlength = 60
+global wlength = 45
 global p1 = $wlength/5
 global p2 = ($wlength/5)*2
 global p3 = ($wlength/5)*3

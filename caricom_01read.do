@@ -131,7 +131,7 @@
 ** We split this into blocks to minimise the daily operation
 ** Chunk: Running 2021 from JAN (01) to JUN (06)
 /// local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
-/// forvalues month = 1/6 {
+/// forvalues month = 1/9 {
 ///    forvalues day = 1/31 {
 ///       local month = string(`month', "%02.0f")
 ///       local day = string(`day', "%02.0f")
@@ -155,7 +155,7 @@
 ///    }
 /// }
 /// clear
-/// forvalues month = 1/6 {
+/// forvalues month = 1/9 {
 ///    forvalues day = 1/31 {
 ///       local month = string(`month', "%02.0f")
 ///       local day = string(`day', "%02.0f")
@@ -164,14 +164,14 @@
 ///       capture append using "`today'"
 ///    }
 /// }
-/// save "`datapath'\jh_time_series2021_jan_jun", replace
+/// save "`datapath'\jh_time_series2021_jan_sep", replace
 
 
 ** Loading 2021 COVID surveillance data
 ** We split this into blocks to minimise the daily operation
 ** Chunk: Running 2021 from JUL (07) to DEC (12)
 local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
-forvalues month = 7/12 {
+forvalues month = 10/12 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -195,7 +195,7 @@ forvalues month = 7/12 {
    }
 }
 clear
-forvalues month = 7/12 {
+forvalues month = 10/12 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -204,13 +204,13 @@ forvalues month = 7/12 {
       capture append using "`today'"
    }
 }
-save "`datapath'\jh_time_series2021_jul_dec", replace
+save "`datapath'\jh_time_series2021_oct_dec", replace
 
 
 ** Join the JH files
 use "`datapath'\jh_time_series2020", clear
-append using "`datapath'\jh_time_series2021_jan_jun"
-append using "`datapath'\jh_time_series2021_jul_dec"
+append using "`datapath'\jh_time_series2021_jan_sep"
+append using "`datapath'\jh_time_series2021_oct_dec"
 save "`datapath'\jh_time_series_full", replace
 
 
