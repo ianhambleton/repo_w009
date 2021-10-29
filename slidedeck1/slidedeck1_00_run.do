@@ -46,6 +46,9 @@ do "`dopath'/slidedeck1_03_metrics.do"
 ** Graphics for slide-deck: Slide 1 (profiles)
 do "`dopath'/slidedeck1_04_slide1.do"
 
+** Graphics for slide-deck: Slide 1 (profiles)
+do "`dopath'/slidedeck1_04A_profiles.do"
+
 ** Graphics for slide-deck: Slide 5 (Barbados models)
 do "`dopath'/slidedeck1_05_slide5.do"
 

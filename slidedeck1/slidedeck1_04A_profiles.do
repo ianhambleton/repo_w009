@@ -240,8 +240,8 @@ preserve
             gr twoway 
 
                 /// CARICOM average
-                (line lowess_14 date if iso=="`country'" & date>=22281 , sort lc("gs8") lw(0.4) lp("-"))
-                (rarea x0 lowess_14 date if iso=="`country'" & date>=22281 , sort col("`pur'%40") lw(none))         
+                (line lowess_14 date if iso=="`country'" & date>=22281 & lowess_14>=0, sort lc("gs8") lw(0.4) lp("-"))
+                (rarea x0 lowess_14 date if iso=="`country'" & date>=22281  & lowess_14>=0, sort col("`pur'%40") lw(none))         
     
                 ,
                     plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 

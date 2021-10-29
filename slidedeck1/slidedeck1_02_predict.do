@@ -251,11 +251,11 @@ local outer1 5 $date1  5 $date2
                 (rarea cases_scen2 cases_scen3 date if iso=="BRB" , sort col("`red2'%40") lw(none))         
                 (rarea cases_scen3 cases_scen4 date if iso=="BRB" , sort col("`red3'%40") lw(none))         
                 (rarea cases_scen4 cases_scen5 date if iso=="BRB" , sort col("`red4'%40") lw(none))         
-                (line cases_scen1 date if scenario==1 & iso=="BRB" , sort lc("gs4") lw(0.2) lp("-"))
-                (line cases_scen5 date if scenario==5 & iso=="BRB" , sort lc("gs4") lw(0.2) lp("-"))
+                (line cases_scen1 date if scenario==1 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
                 (line cases_scen2 date if scenario==2 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
-                (line cases_scen3 date if scenario==3 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
+                (line cases_scen3 date if scenario==3 & iso=="BRB" , sort lc("gs4") lw(0.3) lp("-"))
                 (line cases_scen4 date if scenario==4 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
+                (line cases_scen5 date if scenario==5 & iso=="BRB" , sort lc("gs10") lw(0.1) lp("-"))
 
                 ,
                     plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -282,7 +282,7 @@ local outer1 5 $date1  5 $date2
                     ytick(0(25)150)
 
                     text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
-                    text(${loc1} 22550 "${peak1} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
+                    text(${loc1} 22550 "${peak3} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
                     text(0 $date3 "${wlength} day" "projection"  ,  place(c) size(4.5) color(gs8) just(left))
 
 
