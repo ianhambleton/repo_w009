@@ -372,7 +372,7 @@ replace metric = . if metric<=0 & mtype==2
 #delimit cr
 graph export "`outputpath'/heatmap_totalcases.png", replace width(4000)
 
-*/
+
 ** -----------------------------------------
 ** HEATMAP -- CUMULATIVE DEATHS -- COUNT
 ** mtype == 5
