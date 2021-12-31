@@ -176,7 +176,7 @@ replace metric = . if metric<=0 & mtype==1
             22260 "Dec 20"
             22349 "Mar 21"
             22441 "Jun 21"
-            ///22533 "Sep 21"
+            22533 "Sep 21"
             $fdate "$fdatef"
     , labs(2.5) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
@@ -267,7 +267,7 @@ replace metric = . if metric<=0 & mtype==3
             22260 "Dec 20"
             22349 "Mar 21"
             22441 "Jun 21"
-            ///22533 "Sep 21"
+            22533 "Sep 21"
             $fdate "$fdatef"
     , labs(2.5) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
@@ -358,7 +358,7 @@ replace metric = . if metric<=0 & mtype==2
             22260 "Dec 20"
             22349 "Mar 21"
             22441 "Jun 21"
-            ///22533 "Sep 21"
+            22533 "Sep 21"
             $fdate "$fdatef"
     , labs(2.5) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
@@ -431,6 +431,7 @@ replace metric = . if metric<=0 & mtype==5
             22260 "Dec 20"
             22349 "Mar 21"
             22441 "Jun 21"
+            22533 "Sep 21"
             ///22533 "Sep 21"
             $fdate "$fdatef"
     , labs(1.75) nogrid glc(gs16) angle(45) format(%9.0f))
@@ -505,6 +506,7 @@ replace metric = . if metric<=0 & mtype==4
             22260 "Dec 20"
             22349 "Mar 21"
             22441 "Jun 21"
+            22533 "Sep 21"
             ///22533 "Sep 21"
             $fdate "$fdatef"
     , labs(1.75) nogrid glc(gs16) angle(45) format(%9.0f))

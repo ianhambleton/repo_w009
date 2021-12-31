@@ -138,13 +138,15 @@ use "`datapath'\caricom_covid_filled", clear
         gen tdeath = sum(death)
     
 
-        ** SMOOTHED CASE rate 
-        asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
-        asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
-        asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
-        ** LOWESS smooth on 14 day mean rate
-        lowess rcase_av_14 date, bwidth(0.1) gen(lowess_14) nograph
-        ** gen accelerate = lowess_14 - lowess_14[_n-1] 
+    ** SMOOTHED CASE rate 
+    asrol rcase , stat(mean) window(date 3) gen(rcase_av_3)
+    asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
+    asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
+    asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
+    ** LOWESS smooth on 14 / 7 / 3 day mean rate
+    lowess rcase_av_14 date, bwidth(0.1) gen(lowess_14) nograph
+    lowess rcase_av_7 date, bwidth(0.1) gen(lowess_7) nograph
+    lowess rcase_av_3 date, bwidth(0.1) gen(lowess_3) nograph
 
     ** Save CARICOM only dataset - will append to country-data later in DO file 
     tempfile caricom
@@ -186,6 +188,7 @@ use "`datapath'\caricom_covid_filled", clear
     order elapsed , after(date)
 
     ** SMOOTHED CASE rate 
+    bysort iso : asrol rcase , stat(mean) window(date 3) gen(rcase_av_3)
     bysort iso : asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
     bysort iso : asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
     bysort iso : asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
@@ -194,16 +197,36 @@ use "`datapath'\caricom_covid_filled", clear
     local clist "AIA ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
     foreach country of local clist {    
         lowess rcase_av_14 date if iso=="`country'", bwidth(0.1) gen(lowess_14_`country') name(low_`country') nograph
+        lowess rcase_av_7 date if iso=="`country'", bwidth(0.1) gen(lowess_7_`country') name(low7_`country') nograph
+        lowess rcase_av_3 date if iso=="`country'", bwidth(0.1) gen(lowess_3_`country') name(low3_`country') nograph
     }
     sort iso date
 
-    ** Create single LOWESS variable
+    ** Create single LOWESS 14 variable
     gen lowess_14 = lowess_14_AIA
     drop lowess_14_AIA
     local clist "ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
     foreach country of local clist {  
         replace lowess_14 = lowess_14_`country' if lowess_14==. & lowess_14_`country'<.
         drop lowess_14_`country'
+    }
+
+    ** Create single LOWESS 7 variable
+    gen lowess_7 = lowess_7_AIA
+    drop lowess_7_AIA
+    local clist "ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
+    foreach country of local clist {  
+        replace lowess_7 = lowess_7_`country' if lowess_7==. & lowess_7_`country'<.
+        drop lowess_7_`country'
+    }
+
+    ** Create single LOWESS 3 variable
+    gen lowess_3 = lowess_3_AIA
+    drop lowess_3_AIA
+    local clist "ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
+    foreach country of local clist {  
+        replace lowess_3 = lowess_3_`country' if lowess_3==. & lowess_3_`country'<.
+        drop lowess_3_`country'
     }
 
     ** Join country files with CARICOM file
@@ -213,7 +236,9 @@ use "`datapath'\caricom_covid_filled", clear
     replace iso_num = 1000 if iso_num==.
 
     ** Calculate acceleration (does rate incraese, decrease, remain steady)
-    gen accelerate = lowess_14 - lowess_14[_n-1] if iso_num == iso_num[_n-1]
+    gen accelerate14 = lowess_14 - lowess_14[_n-1] if iso_num == iso_num[_n-1]
+    gen accelerate7 = lowess_7 - lowess_7[_n-1] if iso_num == iso_num[_n-1]
+    gen accelerate3 = lowess_3 - lowess_3[_n-1] if iso_num == iso_num[_n-1]
 
     ** Save the joined dataset of CARICOM country trajectories
     save "`datapath'\caricom_trajectories", replace
@@ -242,10 +267,10 @@ use "`datapath'\caricom_covid_filled", clear
 
 ** (6) Rate --> % of peak
     ** (a) Highest observed case rate in each country
-    bysort iso : egen hrate = max(rcase_av_14) 
+    bysort iso : egen hrate = max(rcase_av_7) 
     ** (b) rate as percetage of highest rate
     sort iso date
-    bysort iso : gen rat = (rcase_av_14 / hrate)*100 if iso!=iso[_n+1]
+    bysort iso : gen rat = (rcase_av_7 / hrate)*100 if iso!=iso[_n+1]
     bysort iso : egen m06 = min(rat)
     drop rat
 
@@ -268,17 +293,17 @@ foreach country of local clist {
     global m02_`country' : dis %9.0fc m02_`country'2
     drop m02_`country'1 m02_`country'2
 
-** (3) Cases in past 14 days
+** (3) Cases in past 7 days
     sort iso date 
-    gen t1 = tcase - tcase[_n-14] if iso!=iso[_n+1] & iso=="`country'"
+    gen t1 = tcase - tcase[_n-7] if iso!=iso[_n+1] & iso=="`country'"
     egen t2 = min(t1)
     local m03_`country' = t2
     global m03_`country' : dis %9.0fc t2
     drop t1 t2 
 
-** (4) Deaths in past 14 days
+** (4) Deaths in past 7 days
     sort iso date 
-    gen t1 = tdeath - tdeath[_n-14] if iso!=iso[_n+1] & iso=="`country'"
+    gen t1 = tdeath - tdeath[_n-7] if iso!=iso[_n+1] & iso=="`country'"
     egen t2 = min(t1)
     local m04_`country' = t2
     global m04_`country' : dis %9.0fc t2
@@ -287,7 +312,7 @@ foreach country of local clist {
 ** (5) Rate increasing, decreasing or steady (-accelerate-)
     sort iso date
     gen t1 = 1 if iso!=iso[_n+1] & iso=="`country'"
-    gen t2 = accelerate if t1==1
+    gen t2 = accelerate7 if t1==1
     egen t3 = min(t2) if iso=="`country'"
     gen t4 = 1 if t3>0 & t1==1
     replace t4 = 2 if t3<0 & t1==1

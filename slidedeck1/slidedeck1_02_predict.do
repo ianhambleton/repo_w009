@@ -62,7 +62,7 @@ save `scenarios', replace
 append using "`datapath'\BRB_trajectory"
 
 ** Order and sort the time series
-order scenario date iso country pop cases
+order scenario date iso country pop cases cases14 cases7 cases3
 sort scenario date days
 
 ** Fill-in the population size, and country names for the modelling scenarios
@@ -82,7 +82,7 @@ rename country t2
 gen country = "$country"
 drop t1 t2 
 order scenario date iso country pop cases 
-keep scenario date iso country pop cases rcase_av_14
+keep scenario date iso country pop cases cases3 cases7 cases14 rcase_av_14 rcase_av_7
 sort scenario date
 
 ** Convert cases to case-rate per 100,000 for the 8 scenarios (ie. scenarios 1 to 8)
@@ -141,10 +141,9 @@ gen x0 = 0
                 /// (scatteri `outer2c' , recast(line) lw(0.2) lc(gs10) fc(none) )
 
                 /// Observed
-                ///(line cases date if scenario==0 & iso=="BRB" , sort lc("gs4") lw(0.4) lp("-"))
-                (line cases date if scenario==0 , sort lc("gs8") lw(0.4) lp("-"))
-                (line rcase_av_14 date if scenario==0 , sort lc("`ora'*1.2") lw(0.2) lp("l"))
-                (rarea x0 rcase_av_14 date if scenario==0 , sort col("`ora'%40") lw(none))        
+                (line cases3 date if scenario==0 & date>=22462, sort lc("gs8") lw(0.4) lp("-"))
+                (line rcase_av_7 date if scenario==0 & date>=22462, sort lc("`ora'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_7 date if scenario==0 & date>=22462, sort col("`ora'%40") lw(none))        
 
                 /// Predictions 
                 /// (rarea cases_scen1 cases_scen2 date if iso=="BRB" , sort col("`red1'%40") lw(none))         
@@ -165,22 +164,20 @@ gen x0 = 0
                 
 
                     xlab(
-                            22281 "1 Jan 2021"
-                            22340 "1 Mar 2021"
-                            22401 "1 May 2021" 
                             22462 "1 Jul 2021"
                             22524 "1 Sep 2021" 
+                            22615 "1 Dec 2021" 
                     , 
                     labs(4) notick nogrid glc(gs16))
-                    xscale(noline   range(22281(10)22585)) 
+                    xscale(noline   range(22462(10)22585)) 
                     xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0(25)150 
+                    ylab(0(50)150 
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline) 
-                    ytick(0(25)150)
+                    ytick(0(10)150)
 
                     text(40.5 22330 "Barbados"         ,  place(e) size(5.5) color(gs8) just(left))
                     /// text($ypos2 $xpos0 "`date_string2'"         ,  place(e) size(5.5) color(gs0) just(left))
@@ -232,19 +229,17 @@ global date2 = $date1 + $wlength
 global date3 = $date1 + ($wlength/2)
 local outer1 5 $date1  5 $date2
 
+** 1 July 2021 and later for this final graphic
+keep if date >= 22462
         #delimit ;
             gr twoway 
                 /// outer boxes 
                 (scatteri `outer1'  , recast(line) lw(2) lc("`red5'%40") fc  (none) )                            
-                /// (scatteri `outer2a' , recast(line) lw(0.2) lc(gs10) fc(none) )
-                /// (scatteri `outer2b' , recast(line) lw(0.2) lc(gs10) fc(none) )
-                /// (scatteri `outer2c' , recast(line) lw(0.2) lc(gs10) fc(none) )
 
                 /// Observed
-                ///(line cases date if scenario==0 & iso=="BRB" , sort lc("gs4") lw(0.4) lp("-"))
-                (line cases date if scenario==0 , sort lc("gs8") lw(0.4) lp("-"))
-                (line rcase_av_14 date if scenario==0 , sort lc("`ora'*1.2") lw(0.2) lp("l"))
-                (rarea x0 rcase_av_14 date if scenario==0 , sort col("`ora'%40") lw(none))        
+                (line cases3 date if scenario==0 & date>=22462 , sort lc("gs8") lw(0.4) lp("-"))
+                (line rcase_av_7 date if scenario==0 & date>=22462 , sort lc("`ora'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_7 date if scenario==0 & date>=22462 , sort col("`ora'%40") lw(none))        
 
                 /// Predictions 
                 (rarea cases_scen1 cases_scen2 date if iso=="BRB" , sort col("`red1'%40") lw(none))         
@@ -264,25 +259,24 @@ local outer1 5 $date1  5 $date2
                     ysize(6) xsize(18)
 
                     xlab(
-                            22281 "1 Jan 2021"
-                            22340 "1 Mar 2021"
-                            22401 "1 May 2021" 
                             22462 "1 Jul 2021"
                             22524 "1 Sep 2021" 
+                            22615 "1 Dec 2021" 
                     , 
                     labs(4) notick nogrid glc(gs16))
-                    xscale(noline   range(22281(10)22585)) 
+                    xscale(noline   range(22462(100)22585)) 
                     xtitle("Outbreak month (2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0(25)150 
+                    ylab(0(200)1000 
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                    yscale(noline range(0(5)${ht1})) 
-                    ytick(0(25)150)
+                    yscale(noline range(0(50)${ht1})) 
+                    ytick(0(50)1000)
+                    ymtick(0(25)1000)
 
-                    text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
-                    text(${loc1} 22550 "${peak3} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
+                    /// text(800 22465 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
+                    text(${loc1} 22560 "${peak2} per 100k"  ,  place(e) size(5.5) color(gs8) just(left))
                     text(0 $date3 "${wlength} day" "projection"  ,  place(c) size(4.5) color(gs8) just(left))
 
 

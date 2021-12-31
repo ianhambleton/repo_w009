@@ -71,12 +71,14 @@ use "`datapath'\caricom_covid", clear
   
 
     ** SMOOTHED CASE rate 
+    asrol rcase , stat(mean) window(date 3) gen(rcase_av_3)
     asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
     asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
     asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
-    ** LOWESS smooth on 14 day mean rate
+    ** LOWESS smooth on 14 / 7 / 3 day mean rate
     lowess rcase_av_14 date, bwidth(0.1) gen(lowess_14) nograph
-    ** gen accelerate = lowess_14 - lowess_14[_n-1] 
+    lowess rcase_av_7 date, bwidth(0.1) gen(lowess_7) nograph
+    lowess rcase_av_3 date, bwidth(0.1) gen(lowess_3) nograph
 
     tempfile caricom
     save `caricom', replace
@@ -117,6 +119,7 @@ use "`datapath'\caricom_covid", clear
     order elapsed , after(date)
 
     ** SMOOTHED CASE rate 
+    bysort iso : asrol rcase , stat(mean) window(date 3) gen(rcase_av_3)
     bysort iso : asrol rcase , stat(mean) window(date 7) gen(rcase_av_7)
     bysort iso : asrol rcase , stat(mean) window(date 14) gen(rcase_av_14)
     bysort iso : asrol rcase , stat(mean) window(date 28) gen(rcase_av_28)
@@ -124,17 +127,37 @@ use "`datapath'\caricom_covid", clear
     ** LOWESS smooth on 14 day mean rate for each country separately
     local clist "AIA ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
     foreach country of local clist {    
-        lowess rcase_av_14 date if iso=="`country'", bwidth(0.1) gen(lowess_14_`country') name(low_`country') nograph
+        lowess rcase_av_14 date if iso=="`country'", bwidth(0.1) gen(lowess_14_`country') name(low14_`country') nograph
+        lowess rcase_av_7 date if iso=="`country'", bwidth(0.1) gen(lowess_7_`country') name(low7_`country') nograph
+        lowess rcase_av_3 date if iso=="`country'", bwidth(0.1) gen(lowess_3_`country') name(low3_`country') nograph
     }
     sort iso date
 
-    ** Create single LOWESS variable
+    ** Create single LOWESS 14 variable
     gen lowess_14 = lowess_14_AIA
     drop lowess_14_AIA
     local clist "ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
     foreach country of local clist {  
         replace lowess_14 = lowess_14_`country' if lowess_14==. & lowess_14_`country'<.
         drop lowess_14_`country'
+    }
+
+    ** Create single LOWESS 7 variable
+    gen lowess_7 = lowess_7_AIA
+    drop lowess_7_AIA
+    local clist "ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
+    foreach country of local clist {  
+        replace lowess_7 = lowess_7_`country' if lowess_7==. & lowess_7_`country'<.
+        drop lowess_7_`country'
+    }
+
+    ** Create single LOWESS 3 variable
+    gen lowess_3 = lowess_3_AIA
+    drop lowess_3_AIA
+    local clist "ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
+    foreach country of local clist {  
+        replace lowess_3 = lowess_3_`country' if lowess_3==. & lowess_3_`country'<.
+        drop lowess_3_`country'
     }
 
     ** Join country files with CARICOM file
@@ -144,11 +167,12 @@ use "`datapath'\caricom_covid", clear
     replace iso_num = 1000 if iso_num==.
 
     ** Calculate acceleration (does rate incraese, decrease, remain steady)
-    gen accelerate = lowess_14 - lowess_14[_n-1] if iso_num == iso_num[_n-1]
+    gen accelerate14 = lowess_14 - lowess_14[_n-1] if iso_num == iso_num[_n-1]
+    gen accelerate7 = lowess_7 - lowess_7[_n-1] if iso_num == iso_num[_n-1]
+    gen accelerate3 = lowess_3 - lowess_3[_n-1] if iso_num == iso_num[_n-1]
 
     ** Save the joined dataset of CARICOM country trajectories
     save "`datapath'\caricom_trajectories", replace
-
 
 
 
@@ -173,10 +197,10 @@ use "`datapath'\caricom_covid", clear
 
 ** (6) Rate --> % of peak
     ** (a) Highest observed case rate in each country
-    bysort iso : egen hrate = max(rcase_av_14) 
+    bysort iso : egen hrate = max(rcase_av_7) 
     ** (b) rate as percetage of highest rate
     sort iso date
-    bysort iso : gen rat = (rcase_av_14 / hrate)*100 if iso!=iso[_n+1]
+    bysort iso : gen rat = (rcase_av_7 / hrate)*100 if iso!=iso[_n+1]
     bysort iso : egen m06 = min(rat)
     drop rat
 
@@ -199,26 +223,26 @@ foreach country of local clist {
     global m02_`country' : dis %9.0fc m02_`country'2
     drop m02_`country'1 m02_`country'2
 
-** (3) Cases in past 14 days
+** (3) Cases in past 7 days
     sort iso date 
-    gen t1 = tcase - tcase[_n-14] if iso!=iso[_n+1] & iso=="`country'"
+    gen t1 = tcase - tcase[_n-7] if iso!=iso[_n+1] & iso=="`country'"
     egen t2 = min(t1)
     local m03_`country' = t2
     global m03_`country' : dis %9.0fc t2
     drop t1 t2 
 
-** (4) Deaths in past 14 days
+** (4) Deaths in past 7 days
     sort iso date 
-    gen t1 = tdeath - tdeath[_n-14] if iso!=iso[_n+1] & iso=="`country'"
+    gen t1 = tdeath - tdeath[_n-7] if iso!=iso[_n+1] & iso=="`country'"
     egen t2 = min(t1)
     local m04_`country' = t2
     global m04_`country' : dis %9.0fc t2
     drop t1 t2 
 
-** (5) Rate increasing, decreasing or steady (-accelerate-)
+** (5) Rate increasing, decreasing or steady in past 7 days (-accelerate-)
     sort iso date
     gen t1 = 1 if iso!=iso[_n+1] & iso=="`country'"
-    gen t2 = accelerate if t1==1
+    gen t2 = accelerate7 if t1==1
     egen t3 = min(t2) if iso=="`country'"
     gen t4 = 1 if t3>0 & t1==1
     replace t4 = 2 if t3<0 & t1==1
@@ -334,9 +358,9 @@ preserve
                 (scatteri `outer2c' , recast(line) lw(0.2) lc(gs10) fc(none) )
 
                 /// CARICOM average
-                (line lowess_14 date if iso=="`country'" , sort lc("gs8") lw(0.4) lp("-"))
-                (line rcase_av_14 date if iso=="`country'" , sort lc("`pur'*1.2") lw(0.2) lp("l"))
-                (rarea x0 rcase_av_14 date if iso=="`country'" , sort col("`pur'%40") lw(none))         
+                (line lowess_3 date if iso=="`country'" , sort lc("gs8") lw(0.4) lp("-"))
+                (line rcase_av_7 date if iso=="`country'" , sort lc("`pur'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_7 date if iso=="`country'" , sort col("`pur'%40") lw(none))         
     
                 ,
                     plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -352,6 +376,8 @@ preserve
                             22281 "1 Jan 21"
                             22371 "1 Apr 21"
                             22462 "1 Jul 21" 
+                            22554 "1 Oct 21" 
+                            22646 "1 Jan 22" 
                     , 
                     labs(4) notick nogrid glc(gs16))
                     xscale(noline) 
@@ -370,11 +396,11 @@ preserve
 
                     text($ypos1 $xpos1 "CASES"                      ,  place(w) size(5) color(gs4) just(left))
                     text($ypos2 $xpos1 "Total: ${m01_`country'}"    ,  place(w) size(5) color(gs8) just(left))
-                    text($ypos3 $xpos1 "14-day: ${m03_`country'}"   ,  place(w) size(5) color(`red2') just(left))
+                    text($ypos3 $xpos1 "7-day: ${m03_`country'}"   ,  place(w) size(5) color(`red2') just(left))
 
                     text($ypos1 $xpos2 "DEATHS"                     ,  place(w) size(5) color(gs4) just(right))
                     text($ypos2 $xpos2 "Total: ${m02_`country'}"    ,  place(w) size(5) color(gs8) just(right))
-                    text($ypos3 $xpos2 "14-day: ${m04_`country'}"   ,  place(w) size(5) color(`red2') just(right))
+                    text($ypos3 $xpos2 "7-day: ${m04_`country'}"   ,  place(w) size(5) color(`red2') just(right))
 
                     text($ypos1 $xpos3 "RATE"                       ,  place(w) size(5) color(gs4) just(right))
                     text($ypos2 $xpos3 "${rate5_`country'} "        ,  place(w) size(5) color(gs8) just(right))
@@ -396,6 +422,9 @@ preserve
             ** graph export "`webpath'/caserate_`country'.jpg", replace width(3000) quality(100)
             global cname = country
     restore
+
+
+
 
 ** SINGLE PAGE PDF
     putpdf begin, pagesize(letter) landscape font("Calibri", 10) margin(top,1cm) margin(bottom,0.5cm) margin(left,1cm) margin(right,1cm)
@@ -439,7 +468,6 @@ preserve
     local date_string = subinstr("`c_date'", " ", "", .)
     putpdf save "`webpath'\caserate_`country'", replace
 }
-
 
 
 ** COMPLETE SET FOR CARICOM

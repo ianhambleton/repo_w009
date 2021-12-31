@@ -203,6 +203,7 @@ foreach country of local clist {
                     3185 "Apr"
                     3198 "Jul"
                     3211 "Oct"
+                    3224 "Jan"
             , labs(5) nogrid glc(gs16) angle(0) format(%9.0f))
             xtitle("Outbreak timeline (2020-2021)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
                 
@@ -285,7 +286,7 @@ foreach country of local clist {
 
     putpdf table t1(1,2)=("Total"), halign(center) 
     putpdf table t1(1,3)=("New"), halign(center) 
-    putpdf table t1(2,3)=("(14 days)"), halign(center) 
+    putpdf table t1(2,3)=("(7 days)"), halign(center) 
     putpdf table t1(1,4)=(""), halign(center) 
     putpdf table t1(2,4)=(""), halign(center) 
     putpdf table t1(1,5)=("Case Rate"), halign(center) 
@@ -432,7 +433,7 @@ foreach country of local clist {
 
     putpdf table t1(1,2)=("Total"), halign(center) 
     putpdf table t1(1,3)=("New"), halign(center) 
-    putpdf table t1(2,3)=("(14 days)"), halign(center) 
+    putpdf table t1(2,3)=("(7 days)"), halign(center) 
     putpdf table t1(1,4)=(""), halign(center) 
     putpdf table t1(2,4)=(""), halign(center) 
     putpdf table t1(1,5)=("Case Rate"), halign(center) 

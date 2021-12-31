@@ -38,7 +38,7 @@
 ** Gather globals
 ** We do this via 
 ** slidedeck1_03_metrics.do
-do "`dopath'/slidedeck1_03_metrics.do"
+do "`dopath'/slidedeck1_05_slide5.do"
 
 
 ** BULLET
@@ -252,7 +252,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - now adding Aug and Sep 2021"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - adding Aug to Dec 2021"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -270,7 +270,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - now adding Aug and Sep 2021"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - adding Aug to Dec 2021"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -288,7 +288,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - now adding Aug and Sep 2021"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - adding Aug to Dec 2021"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -296,7 +296,7 @@ putpdf pagebreak
     putpdf paragraph 
     putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - Now at their peak") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2J (BAHAMAS current)
 putpdf pagebreak
@@ -307,7 +307,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - now adding Aug and Sep 2021"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - adding Aug to Dec 2021"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -315,8 +315,8 @@ putpdf pagebreak
     putpdf paragraph 
     putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - Now at their peak") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  The Bahamas - Experiencing a third extended wave") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  The Bahamas - Extended wave in Autumn 2021, and new wave beginning") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2K (BARBADOS current)
 putpdf pagebreak
@@ -327,7 +327,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - now adding Aug and Sep 2021"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - adding Aug to Dec 2021"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -335,9 +335,9 @@ putpdf pagebreak
     putpdf paragraph 
     putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - Now at their peak") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  The Bahamas - Experiencing a third extended wave") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Barbados - 2nd outbreak underway") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  The Bahamas - Extended wave in Autumn 2021, and new wave beginning") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Barbados - large outbreak in Autumn 2021") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2L (TRINIDAD current)
 putpdf pagebreak
@@ -348,7 +348,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - now adding Aug and Sep 2021"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - adding Aug to Dec 2021"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -356,10 +356,10 @@ putpdf pagebreak
     putpdf paragraph 
     putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - Now at their peak") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  The Bahamas - Experiencing a third extended wave") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Barbados - 2nd outbreak underway") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Trinidad - no new wave yet") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  The Bahamas - Extended wave in Autumn 2021, and new wave beginning") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Barbados - large outbreak in Autumn 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Trinidad - 3rd wave in Dec 2021") , font("Calibri Light", 24, 999999) linebreak
 
 
 
@@ -407,13 +407,11 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/caserate_CAR.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Outbreaks are now coinciding across CARICOM") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  in Autumn 2021 outbreaks coincided across CARICOM") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text ("$bullet  CARICOM overall rates are peaking") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  CARICOM overall rates peaked in Sep/Oct 2021") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text ("$bullet  And they continue to rise") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text ("$bullet  ${p14_CAR} percent of all cases in past 2 weeks") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Late Dec - rates starting to rise again - Omicron wave begins") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 5 - Countries with rates rising / falling
 putpdf pagebreak
@@ -437,7 +435,7 @@ putpdf pagebreak
     putpdf table t1(1,2/5), font("Calibri Light", 14, 000000) border(left,nil) border(right,nil)  border(top, single, 8c8c8c) border(bottom, single, 8c8c8c) bgcolor(e6e6e6) 
     ///putpdf table t1(1,1)=("Current Outbreaks"), colspan(3) halign(left) font("Calibri Light", 24, 000000)
     putpdf table t1(1,1)=("Country"), halign(center) 
-    putpdf table t1(1,2)=("# cases (14d)"), halign(center) 
+    putpdf table t1(1,2)=("# cases (7d)"), halign(center) 
     putpdf table t1(1,3)=("rate (100k)"), halign(center) 
     putpdf table t1(1,4)=("% of peak"), halign(center) 
     putpdf table t1(1,5)=("Trend"), halign(center) 
@@ -723,65 +721,65 @@ putpdf pagebreak
 ** FIGURE 
     putpdf table f2 = (10,4), width(100%) border(all,nil) halign(center)
     putpdf table f2(1,1)=("Antigua & Barbuda:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(1,1)=("${p14_ATG}%"), halign(left) font("Calibri Light", 12, 808080) append 
+    /// putpdf table f2(1,1)=("${p14_ATG}%"), halign(left) font("Calibri Light", 12, 808080) append 
     putpdf table f2(1,2)=("Bahamas:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(1,2)=("${p14_BHS}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(1,2)=("${p14_BHS}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(1,3)=("Barbados:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(1,3)=("${p14_BRB}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(1,3)=("${p14_BRB}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(1,4)=("Belize:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(1,4)=("${p14_BLZ}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(1,4)=("${p14_BLZ}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(2,1)=image("`outputpath'/caserate_spark_ATG.png")
     putpdf table f2(2,2)=image("`outputpath'/caserate_spark_BHS.png")
     putpdf table f2(2,3)=image("`outputpath'/caserate_spark_BRB.png")
     putpdf table f2(2,4)=image("`outputpath'/caserate_spark_BLZ.png")
 
     putpdf table f2(3,1)=("Dominica:%"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(3,1)=("${p14_DMA}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(3,1)=("${p14_DMA}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(3,2)=("Grenada:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(3,2)=("${p14_GRD}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(3,2)=("${p14_GRD}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(3,3)=("Guyana:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(3,3)=("${p14_GUY}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(3,3)=("${p14_GUY}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(3,4)=("Haiti:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(3,4)=("${p14_HTI}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(3,4)=("${p14_HTI}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(4,1)=image("`outputpath'/caserate_spark_DMA.png")
     putpdf table f2(4,2)=image("`outputpath'/caserate_spark_GRD.png")
     putpdf table f2(4,3)=image("`outputpath'/caserate_spark_GUY.png")
     putpdf table f2(4,4)=image("`outputpath'/caserate_spark_HTI.png")
 
     putpdf table f2(5,1)=("Jamaica:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(5,1)=("${p14_JAM}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(5,1)=("${p14_JAM}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(5,2)=("St Kitts & Nevis:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(5,2)=("${p14_KNA}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(5,2)=("${p14_KNA}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(5,3)=("St Lucia:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(5,3)=("${p14_LCA}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(5,3)=("${p14_LCA}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(5,4)=("St Vincent & Grenadines:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(5,4)=("${p14_VCT}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(5,4)=("${p14_VCT}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(6,1)=image("`outputpath'/caserate_spark_JAM.png")
     putpdf table f2(6,2)=image("`outputpath'/caserate_spark_KNA.png")
     putpdf table f2(6,3)=image("`outputpath'/caserate_spark_LCA.png")
     putpdf table f2(6,4)=image("`outputpath'/caserate_spark_VCT.png")
 
     putpdf table f2(7,1)=("Suriname:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(7,1)=("${p14_SUR}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(7,1)=("${p14_SUR}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(7,2)=("Trinidad:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(7,2)=("${p14_TTO}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(7,2)=("${p14_TTO}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(7,3)=("Anguilla:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(7,3)=("${p14_AIA}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(7,3)=("${p14_AIA}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(7,4)=("Bermuda:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(7,4)=("${p14_BMU}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(7,4)=("${p14_BMU}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(8,1)=image("`outputpath'/caserate_spark_SUR.png")
     putpdf table f2(8,2)=image("`outputpath'/caserate_spark_TTO.png")
     putpdf table f2(8,3)=image("`outputpath'/caserate_spark_AIA.png")
     putpdf table f2(8,4)=image("`outputpath'/caserate_spark_BMU.png")
 
     putpdf table f2(9,1)=("BVI:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(9,1)=("${p14_VGB}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(9,1)=("${p14_VGB}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(9,2)=("Cayman:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(9,2)=("${p14_CYM}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(9,2)=("${p14_CYM}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(9,3)=("Montserrat:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(9,3)=("${p14_MSR}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(9,3)=("${p14_MSR}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(9,4)=("Turks & Caicos:"), halign(left) font("Calibri Light", 12, 000000)  
-    putpdf table f2(9,4)=("${p14_TCA}%"), halign(left) font("Calibri Light", 12, 808080) append  
+    /// putpdf table f2(9,4)=("${p14_TCA}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(10,1)=image("`outputpath'/caserate_spark_VGB.png")
     putpdf table f2(10,2)=image("`outputpath'/caserate_spark_CYM.png")
     putpdf table f2(10,3)=image("`outputpath'/caserate_spark_MSR.png")

@@ -129,7 +129,7 @@ sort iso date
                         22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
-                xscale(noline) 
+                xscale(noline range(22006(10)22645)) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
@@ -199,7 +199,7 @@ sort iso date
                         22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
-                xscale(noline) 
+                xscale(noline range(22006(10)22645)) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
@@ -269,7 +269,7 @@ sort iso date
                         22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
-                xscale(noline) 
+                xscale(noline range(22006(10)22645)) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
@@ -340,7 +340,7 @@ sort iso date
                         22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
-                xscale(noline) 
+                xscale(noline range(22006(10)22645)) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
@@ -410,7 +410,7 @@ sort iso date
                         22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
-                xscale(noline) 
+                xscale(noline range(22006(10)22645)) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
@@ -480,7 +480,7 @@ sort iso date
                         22615 "1 Dec 21"
                    , 
                 labs(3) notick nogrid glc(gs16))
-                xscale(noline) 
+                xscale(noline range(22006(10)22645)) 
                 xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                 
 
@@ -508,7 +508,7 @@ sort iso date
 
 
 
-** SURINAME - to now
+** SURINAME - to END 2021
     #delimit ;
         gr twoway             
             /// SURINAME
@@ -536,8 +536,8 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%45") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`yel'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`yel'%45") lw(none))
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
                 graphregion(color(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -612,12 +612,12 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%45") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`blu'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`blu'%45") lw(none))
 
 
             ,
@@ -694,16 +694,16 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(3aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%45") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`gre'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`gre'%45") lw(none))
 
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -778,20 +778,20 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%10") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`gre'%10") lw(none))
 
             // BAHAMAS to now
-            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`red'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`red'%45") lw(none))
+            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`red'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`red'%45") lw(none))
 
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -867,24 +867,24 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%45") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%10") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`gre'%10") lw(none))
 
             // BAHAMAS to now
-            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`red'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`red'%10") lw(none))
+            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`red'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`red'%10") lw(none))
 
             // BARBADOS to now
-            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`ora'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`ora'%45") lw(none))
+            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`ora'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`ora'%45") lw(none))
 
             ,
                 plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -961,28 +961,28 @@ sort iso date
             (rarea x0 rcase_av_14 date if iso=="BRB" & date < d(1aug2021) , sort col("`ora'%10") lw(none))
 
             // SURINAME to now
-            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`yel'%10") lw(none))
+            (line rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`yel'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="SUR" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`yel'%10") lw(none))
 
             // JAMAICA to now
-            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`blu'%10") lw(none))
+            (line rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`blu'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="JAM" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`blu'%10") lw(none))
 
             // GUYANA to now
-            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`gre'%10") lw(none))
+            (line rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`gre'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="GUY" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`gre'%10") lw(none))
 
             // BAHAMAS to now
-            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`red'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`red'%10") lw(none))
+            (line rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`red'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BHS" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`red'%10") lw(none))
 
             // BARBADOS to now
-            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`ora'%20") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`ora'%10") lw(none))
+            (line rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`ora'%20") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="BRB" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`ora'%10") lw(none))
 
             // TRINIDAD to now
-            (line rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(1dec2021), sort lc("`pur'%50") lw(0.2) lp("l"))
-            (rarea x0 rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(1dec2021)  , sort col("`pur'%45") lw(none))
+            (line rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(31dec2021), sort lc("`pur'%50") lw(0.2) lp("l"))
+            (rarea x0 rcase_av_14 date if iso=="TTO" & date >= d(3aug2021) & date < d(31dec2021)  , sort col("`pur'%45") lw(none))
 
 
             ,

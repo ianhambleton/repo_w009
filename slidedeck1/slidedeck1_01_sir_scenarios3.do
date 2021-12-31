@@ -42,12 +42,12 @@ keep if iso=="BRB"
 
 ** Order from latest to oldest date
 gsort -date
-keep date iso country pop lowess_14 accelerate rcase_av_14
-order date iso country pop rcase_av_14 lowess_14 accelerate 
+keep date iso country pop lowess_14 lowess_7 lowess_3 accelerate14 accelerate7 accelerate3 rcase_av_14 rcase_av_7 rcase_av_3
+order date iso country pop rcase_av_14 lowess_14 lowess_7 lowess_3 accelerate14 accelerate7 accelerate3 
 
 ** Find most recent nadir
-gen acc1 = 1 if accelerate > 0
-replace acc1 = 2 if accelerate < 0
+gen acc1 = 1 if accelerate7 > 0
+replace acc1 = 2 if accelerate7 < 0
 gen acc2 = _n if acc1==2 & acc1[_n-1]==1
 egen acc3 = min(acc2)
 **keep if _n < acc3
@@ -59,7 +59,7 @@ sort date
 sort date 
 gen elapsed = _n 
 egen t1 = max(elapsed) 
-gen t2 = lowess_14 if t1==elapsed
+gen t2 = lowess_3 if t1==elapsed
 gen t3 = (t2/100000) * pop
 egen t4 = min(t3) 
 global frate = t4
@@ -67,9 +67,11 @@ drop elapsed t1 t2 t3 t4
 
 ** Save the observed dataset
 gen scenario = 0
-keep scenario date iso country pop lowess_14 rcase_av_14
-order scenario date iso country pop rcase_av_14 lowess_14 
-rename lowess_14 cases
+keep scenario date iso country pop lowess_14 lowess_7 lowess_3 rcase_av_14 rcase_av_7 rcase_av_3 accelerate14 accelerate7 accelerate3
+order scenario date iso country pop lowess_14 lowess_7 lowess_3 rcase_av_14 rcase_av_7 rcase_av_3 accelerate14 accelerate7 accelerate3
+rename lowess_14 cases14
+rename lowess_7 cases7
+rename lowess_3 cases3
 save "`datapath'\BRB_trajectory", replace
 
 
@@ -98,54 +100,96 @@ global wk3 = 1.1
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 3 (25-Sep-2021)
+** scenario (25-Sep-2021)
 global wk1 = 1.4
 global wk2 = 1.2
 global wk3 = 1.1
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 4 (6-Oct-2021)
+** scenario (6-Oct-2021)
 global wk1 = 1.45
 global wk2 = 1.25
 global wk3 = 1.1
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 5 (28-Oct-2021)
+** scenario (28-Oct-2021)
 global wk1 = 1.25
 global wk2 = 1.15
 global wk3 = 1.1
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 6 (9-Nov-2021)
+** scenario (9-Nov-2021)
 global wk1 = 1.15
 global wk2 = 1.05
 global wk3 = 0.9
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 7 (9-Nov-2021)
+** scenario (9-Nov-2021)
 global wk1 = 1.1
 global wk2 = 1.05
 global wk3 = 0.9
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 7 (9-Nov-2021)
+** scenario (9-Nov-2021)
 global wk1 = 1.05
 global wk2 = 0.95
 global wk3 = 0.9
 global wk4 = 0.8
 global wk5 = 0.5
 
-** scenario 7 (15-Nov-2021)
+** scenario (15-Nov-2021)
 global wk1 = 0.95
 global wk2 = 0.85
 global wk3 = 0.8
 global wk4 = 0.6
 global wk5 = 0.3
+
+** scenario (19-Nov-2021)
+global wk1 = 0.85
+global wk2 = 0.75
+global wk3 = 0.6
+global wk4 = 0.3
+global wk5 = 0.1
+
+** scenario (24-Nov-2021)
+global wk1 = 0.7
+global wk2 = 0.6
+global wk3 = 0.4
+global wk4 = 0.3
+global wk5 = 0.1
+
+** scenario (29-Nov-2021)
+global wk1 = 0.55
+global wk2 = 0.25
+global wk3 = 0.15
+global wk4 = 0.1
+global wk5 = 0.1
+
+** scenario (8-Dec-2021)
+global wk1 = 0.4
+global wk2 = 0.3
+global wk3 = 0.15
+global wk4 = 0.1
+global wk5 = 0.1
+
+** scenario (23-Dec-2021)
+global wk1 = 0.05
+global wk2 = 0.04
+global wk3 = 0.03
+global wk4 = 0.02
+global wk5 = 0.01
+
+** scenario (31-Dec-2021)
+global wk1 = 4.0
+global wk2 = 3.0
+global wk3 = 1.5
+global wk4 = 0.4
+global wk5 = 0.2
 
 ** wlength: Length of model window
 **      w1: Period 1 

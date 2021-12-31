@@ -41,7 +41,7 @@
 do "`dopath'/slidedeck1_02_predict.do"
 
 ** GLobal macros for dynamic messaging in slide-deck
-do "`dopath'/slidedeck1_03_metrics.do"
+** do "`dopath'/slidedeck1_03_metrics.do"
 
 ** Graphics for slide-deck: Slide 1 (profiles)
 do "`dopath'/slidedeck1_04_slide1.do"
@@ -50,7 +50,7 @@ do "`dopath'/slidedeck1_04_slide1.do"
 do "`dopath'/slidedeck1_04A_profiles.do"
 
 ** Graphics for slide-deck: Slide 5 (Barbados models)
-do "`dopath'/slidedeck1_05_slide5.do"
+** do "`dopath'/slidedeck1_05_slide5.do"
 
 ** Building the slides - including ALL regional profiles
 do "`dopath'/slidedeck1_06_slides.do"
