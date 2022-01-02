@@ -82,7 +82,7 @@ global bullet = uchar(8226)
     putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
     putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
     putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
-    putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
+    putpdf table intro1(1,2)=("https://bit.ly/uwi-covid19 "), halign(left) underline append linebreak 
     putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append
 
     putpdf paragraph  , halign(center) 
@@ -112,7 +112,7 @@ putpdf pagebreak
     putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
     putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
     putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
-    putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
+    putpdf table intro1(1,2)=("https://bit.ly/uwi-covid19 "), halign(left) underline append linebreak 
     putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append
 
     putpdf paragraph  , halign(center) 
@@ -379,7 +379,7 @@ putpdf pagebreak
     putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
     putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
     putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
-    putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
+    putpdf table intro1(1,2)=("https://bit.ly/uwi-covid19 "), halign(left) underline append linebreak 
     putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append
 
     putpdf paragraph, halign(center)  
@@ -790,64 +790,64 @@ putpdf pagebreak
 
 
 ** SLIDE 7. PREDICTION
-putpdf pagebreak
-    putpdf table intro1 = (1,16), width(100%) halign(left) 
-    putpdf table intro1(.,.), border(all, nil)
-    putpdf table intro1(1,.), font("Calibri Light", 8, 000000)  
-    putpdf table intro1(1,1)
-    putpdf table intro1(1,2), colspan(15)
-    putpdf table intro1(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro1(1,2)=("COVID-19 SLIDE DECK"), halign(left) linebreak font("Calibri Light", 20 , 000000)
-    putpdf table intro1(1,2)=("Slide deck created by staff of the George Alleyne Chronic Disease Research Centre "), append halign(left) 
-    putpdf table intro1(1,2)=("and the Public Health Group of The Faculty of Medical Sciences, Cave Hill Campus, "), halign(left) append  
-    putpdf table intro1(1,2)=("The University of the West Indies. "), halign(left) append 
-    putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
-    putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
-    putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
-    putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
-    putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append
-
-    putpdf paragraph, halign(center) 
-    putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text ("COVID-19 in the Caribbean") , font("Calibri Light", 32, 000000) linebreak
-    putpdf text ("Part 3: Prediction") , font("Calibri Light", 28, 808080) linebreak
-
-
-
-
-** SLIDE 8 - BARBADOS EXAMPLE
-putpdf pagebreak
-    putpdf table intro2 = (1,20), width(100%) halign(left)    
-    putpdf table intro2(.,.), border(all, nil) valign(center)
-    putpdf table intro2(1,.), font("Calibri Light", 24, 000000)  
-    putpdf table intro2(1,1)
-    putpdf table intro2(1,2), colspan(14)
-    putpdf table intro2(1,16), colspan(5)
-    putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("Prediction of Daily Cases: example Barbados"), halign(left) linebreak
-    putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
-    putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
-    putpdf table f2 = (2,1), width(90%) border(all,nil) halign(left)
-    putpdf table f2(1,1)=image("`outputpath'/caserate_BRB_clean.png")
-    ///putpdf table f2(2,1)=image("`outputpath'/caserate_predict_BRB.png")
-
-** SLIDE 8 - BARBADOS EXAMPLE
-putpdf pagebreak
-    putpdf table intro2 = (1,20), width(100%) halign(left)    
-    putpdf table intro2(.,.), border(all, nil) valign(center)
-    putpdf table intro2(1,.), font("Calibri Light", 24, 000000)  
-    putpdf table intro2(1,1)
-    putpdf table intro2(1,2), colspan(14)
-    putpdf table intro2(1,16), colspan(5)
-    putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("Prediction of Daily Cases: example Barbados"), halign(left) linebreak
-    putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
-    putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
-    putpdf table f2 = (2,1), width(90%) border(all,nil) halign(left)
-    putpdf table f2(1,1)=image("`outputpath'/caserate_BRB_clean.png")
-    putpdf table f2(2,1)=image("`outputpath'/caserate_predict_BRB.png")
+/// putpdf pagebreak
+///     putpdf table intro1 = (1,16), width(100%) halign(left) 
+///     putpdf table intro1(.,.), border(all, nil)
+///     putpdf table intro1(1,.), font("Calibri Light", 8, 000000)  
+///     putpdf table intro1(1,1)
+///     putpdf table intro1(1,2), colspan(15)
+///     putpdf table intro1(1,1)=image("`outputpath'/uwi_crest_small.jpg")
+///     putpdf table intro1(1,2)=("COVID-19 SLIDE DECK"), halign(left) linebreak font("Calibri Light", 20 , 000000)
+///     putpdf table intro1(1,2)=("Slide deck created by staff of the George Alleyne Chronic Disease Research Centre "), append halign(left) 
+///     putpdf table intro1(1,2)=("and the Public Health Group of The Faculty of Medical Sciences, Cave Hill Campus, "), halign(left) append  
+///     putpdf table intro1(1,2)=("The University of the West Indies. "), halign(left) append 
+///     putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
+///     putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
+///     putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
+///     putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
+///     putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append
+/// 
+///     putpdf paragraph, halign(center) 
+///     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
+///     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
+///     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
+///     putpdf text ("COVID-19 in the Caribbean") , font("Calibri Light", 32, 000000) linebreak
+///     putpdf text ("Part 3: Prediction") , font("Calibri Light", 28, 808080) linebreak
+/// 
+/// 
+/// 
+/// 
+/// ** SLIDE 8 - BARBADOS EXAMPLE
+/// putpdf pagebreak
+///     putpdf table intro2 = (1,20), width(100%) halign(left)    
+///     putpdf table intro2(.,.), border(all, nil) valign(center)
+///     putpdf table intro2(1,.), font("Calibri Light", 24, 000000)  
+///     putpdf table intro2(1,1)
+///     putpdf table intro2(1,2), colspan(14)
+///     putpdf table intro2(1,16), colspan(5)
+///     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
+///     putpdf table intro2(1,2)=("Prediction of Daily Cases: example Barbados"), halign(left) linebreak
+///     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
+///     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
+///     putpdf table f2 = (2,1), width(90%) border(all,nil) halign(left)
+///     putpdf table f2(1,1)=image("`outputpath'/caserate_BRB_clean.png")
+///     ///putpdf table f2(2,1)=image("`outputpath'/caserate_predict_BRB.png")
+/// 
+/// ** SLIDE 8 - BARBADOS EXAMPLE
+/// putpdf pagebreak
+///     putpdf table intro2 = (1,20), width(100%) halign(left)    
+///     putpdf table intro2(.,.), border(all, nil) valign(center)
+///     putpdf table intro2(1,.), font("Calibri Light", 24, 000000)  
+///     putpdf table intro2(1,1)
+///     putpdf table intro2(1,2), colspan(14)
+///     putpdf table intro2(1,16), colspan(5)
+///     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
+///     putpdf table intro2(1,2)=("Prediction of Daily Cases: example Barbados"), halign(left) linebreak
+///     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
+///     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
+///     putpdf table f2 = (2,1), width(90%) border(all,nil) halign(left)
+///     putpdf table f2(1,1)=image("`outputpath'/caserate_BRB_clean.png")
+///     putpdf table f2(2,1)=image("`outputpath'/caserate_predict_BRB.png")
 
 
 ** SLIDE 9. WEB-PAGE LOCATION
@@ -865,7 +865,7 @@ putpdf pagebreak
     putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
     putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
     putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
-    putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
+    putpdf table intro1(1,2)=("https://bit.ly/uwi-covid19 "), halign(left) underline append linebreak 
     putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append linebreak
 
     putpdf paragraph , halign(center) 
@@ -880,7 +880,7 @@ putpdf pagebreak
 
     putpdf paragraph , halign(center) 
     putpdf text (" ") , font("Calibri Light", 20, 000000) linebreak
-    putpdf text ("https://ianhambleton.com/covid19/ "), font("Calibri Light", 28, 999999) underline linebreak 
+    putpdf text ("https://bit.ly/uwi-covid19 "), font("Calibri Light", 28, 999999) underline linebreak 
     
     
 
@@ -902,7 +902,7 @@ putpdf pagebreak
     putpdf table intro1(1,2)=("Group Contacts: Ian Hambleton (analytics), Maddy Murphy (public health interventions), "), halign(left) append italic  
     putpdf table intro1(1,2)=("Kim Quimby (logistics planning), Natasha Sobers (surveillance). "), halign(left) append italic   
     putpdf table intro1(1,2)=("For all our COVID-19 surveillance outputs, go to "), halign(left) append
-    putpdf table intro1(1,2)=("https://ianhambleton.com/covid19/ "), halign(left) underline append linebreak 
+    putpdf table intro1(1,2)=("https://bit.ly/uwi-covid19 "), halign(left) underline append linebreak 
     putpdf table intro1(1,2)=("Updated on: $S_DATE at $S_TIME "), halign(left) bold append
 
     putpdf paragraph , halign(center) 
@@ -910,7 +910,7 @@ putpdf pagebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
     putpdf text ("COVID-19 in the Caribbean") , font("Calibri Light", 32, 000000) linebreak
-    putpdf text ("Part 4: Country Profiles") , font("Calibri Light", 28, 808080) linebreak
+    putpdf text ("Part 3: Country Profiles") , font("Calibri Light", 28, 808080) linebreak
 
 
     ** CARICOM 

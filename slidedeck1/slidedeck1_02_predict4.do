@@ -163,7 +163,7 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
         global date2 = $date1 + $wlength1
         global date3 = $date1 + ($wlength1/2)
         local outer1 5 $date1  5 $date2
-        global locw  : dis %6.0f $nloc6 - 125
+        global locw  : dis %6.0f $nloc6 - 175
 
         ** Longer period
         global ldate2 = $date1 + $wlength2
@@ -279,13 +279,13 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
                     xscale(noline   range(22462(10)${date2})) 
                     xtitle("Outbreak month (2021-22)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0(200)1000 
+                    ylab(0(200)1400 
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline range(0(10)${ht1})) 
-                    ytick(0(50)1000)
-                    ymtick(0(25)1000)
+                    ytick(0(50)1400)
+                    ymtick(0(25)1400)
 
                     text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
                     text(${nloc6} 22514 "${wlength2}-day wave: Peak of ${peak7} per 100k (Total cases, ${tot7})"  ,  place(e) size(7.5) color(gs8) just(left))
@@ -362,13 +362,13 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
                     xscale(noline   range(22462(10)${date2})) 
                     xtitle("Outbreak month (2021-22)", size(4) margin(l=2 r=2 t=4 b=2)) 
 
-                    ylab(0(200)1000 
+                    ylab(0(200)1400 
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
                     yscale(noline range(0(10)${ht1})) 
-                    ytick(0(50)1000)
-                    ymtick(0(25)1000)
+                    ytick(0(50)1400)
+                    ymtick(0(25)1400)
 
                     text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
                     text(${nloc6} 22514 "${wlength2}-day wave: Peak of ${peak7} per 100k (Total cases, ${tot7})"  ,  place(e) size(7.5) color(gs8) just(left))
@@ -407,6 +407,7 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
 ** Percentage hospitalised
 global hosp_lo = 0.012
 global hosp_hi = 0.020
+global hosp_hi3 = 0.030
 local ldays = 5
 local hdays = 7
 
@@ -416,8 +417,9 @@ keep if cases_scen7<.
 
 ** Number hospitalised per day
 ** Low 
-gen dhosp_lo = cases_scen7 * $hosp_lo
-gen dhosp_hi = cases_scen7 * $hosp_hi
+gen dhosp_lo =  cases_scen7 * $hosp_lo
+gen dhosp_hi =  cases_scen7 * $hosp_hi
+gen dhosp_hi3 = cases_scen7 * $hosp_hi3
 
 ** Cumulative hospitalisation
 ** Assume a 5 day stay and a 7-day stay
@@ -433,21 +435,32 @@ gen chosp`hdays'_hi = .
 replace chosp`ldays'_hi = (cases_scen7[_n] + cases_scen7[_n-1] + cases_scen7[_n-2] + cases_scen7[_n-3] + cases_scen7[_n-4] + cases_scen7[_n-5] + cases_scen7[_n-6]) * $hosp_hi
 replace chosp`hdays'_hi = (cases_scen7[_n] + cases_scen7[_n-1] + cases_scen7[_n-2] + cases_scen7[_n-3] + cases_scen7[_n-4] + cases_scen7[_n-5] + cases_scen7[_n-6]) * $hosp_hi
 
+gen chosp`ldays'_hi3 = .
+gen chosp`hdays'_hi3 = .
+replace chosp`ldays'_hi3 = (cases_scen7[_n] + cases_scen7[_n-1] + cases_scen7[_n-2] + cases_scen7[_n-3] + cases_scen7[_n-4] + cases_scen7[_n-5] + cases_scen7[_n-6]) * $hosp_hi3
+replace chosp`hdays'_hi3 = (cases_scen7[_n] + cases_scen7[_n-1] + cases_scen7[_n-2] + cases_scen7[_n-3] + cases_scen7[_n-4] + cases_scen7[_n-5] + cases_scen7[_n-6]) * $hosp_hi3
+
 order dhosp* chosp* , after(cases_scen7) 
 
 ** Actual Hospital Totals rather than rates
 gen clo`ldays' = chosp`ldays'_lo * 2.8
 gen chi`ldays' = chosp`ldays'_hi * 2.8
+gen chi3`ldays' = chosp`ldays'_hi3 * 2.8
 gen clo`hdays' = chosp`hdays'_lo * 2.8
 gen chi`hdays' = chosp`hdays'_hi * 2.8
+gen chi3`hdays' = chosp`hdays'_hi3 * 2.8
 egen pa1 = max(clo`ldays')
 egen pa2 = max(chi`ldays')
-egen pa3 = max(clo`hdays')
-egen pa4 = max(chi`hdays')
+egen pa3 = max(chi3`ldays')
+egen pa4 = max(clo`hdays')
+egen pa5 = max(chi`hdays')
+egen pa6 = max(chi3`hdays')
 global pa1 : dis %5.0fc pa1
 global pa2 : dis %5.0fc pa2
 global pa3 : dis %5.0fc pa3
 global pa4 : dis %5.0fc pa4
+global pa5 : dis %5.0fc pa5
+global pa6 : dis %5.0fc pa6
 
 ** --------------------------------------------------------------
 ** HOSPITALISATION
@@ -456,11 +469,13 @@ global pa4 : dis %5.0fc pa4
         #delimit ;
             gr twoway                           
                 (rarea cases_scen7 chosp5_lo date if iso=="BRB" , sort col("`red5'%60") lw(none))         
-                (rarea chosp7_hi x0 date if iso=="BRB" , sort col("`red3'%60") lw(none))         
-                (rarea chosp5_lo x0 date if iso=="BRB" , sort col("`red2'%60") lw(none))         
+                (rarea chosp7_hi3 x0 date if iso=="BRB" , sort col("`red3'%60") lw(none))         
+                (rarea chosp7_hi x0 date if iso=="BRB" , sort col("`red2'%60") lw(none))         
+                (rarea chosp5_lo x0 date if iso=="BRB" , sort col("`red1'%60") lw(none))         
         
                 (line cases_scen7 date if scenario==7 & iso=="BRB" , sort lc("gs1") lw(0.3) lp("-"))
-                (line chosp7_hi date if scenario==7 & iso=="BRB" , sort lc("gs1") lw(0.3) lp("-"))
+                (line chosp7_hi3 date if scenario==7 & iso=="BRB" , sort lc("gs1") lw(0.3) lp("-"))
+                (line chosp7_hi date if scenario==7 & iso=="BRB" , sort lc("gs4") lw(0.3) lp("-"))
                 (line chosp5_lo date if scenario==7 & iso=="BRB" , sort lc("gs4") lw(0.3) lp("-"))
                 ,
                     plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
@@ -484,18 +499,19 @@ global pa4 : dis %5.0fc pa4
                     ytick(0(50)1000)
                     ymtick(0(25)1000)
 
-                    text(400 22665 "Peak in hospital (higher): $pa4"  ,  place(e) size(7.5) color(gs8) just(left))
-                    text(300 22665 "Peak in hospital (lower): $pa3"  ,  place(e) size(7.5) color(gs8) just(left))
+                    text(650 22665 "Peak in hospital (3.0%): $pa6"  ,  place(e) size(7.5) color(gs8) just(left))
+                    text(500 22665 "Peak in hospital (2.0%): $pa5"  ,  place(e) size(7.5) color(gs8) just(left))
+                    text(350 22665 "Peak in hospital (1.2%): $pa4"  ,  place(e) size(7.5) color(gs8) just(left))
                     /// text(0 $date3 "${wlength2} day" ,  place(c) size(4.5) color(gs4) just(left))
-
 
                     legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
                     region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
                     symysize(5) symxsize(7)
-                    order(1 2 3) 
+                    order(1 2 3 4) 
                     lab(1 "Cases")
-                    lab(2 "Hospitalised (higher estimate)")
-                    lab(3 "Hospitalised (lower estimate)")
+                    lab(2 "Hospitalised (3%)")
+                    lab(3 "Hospitalised (2%)")
+                    lab(4 "Hospitalised (1.2%)")
                     )
                     name(predicted_BRB_hosp) 
                     ;
@@ -506,12 +522,20 @@ global pa4 : dis %5.0fc pa4
 ** Average number of hospitalisations per week over span of outbreak
 gen week = week(date) 
 order week, after(date)
-collapse (mean) av_lo=dhosp_lo av_hi=dhosp_hi , by(week)
+collapse (mean) av_lo=dhosp_lo av_hi=dhosp_hi av_hi3=dhosp_hi3, by(week)
 tabdisp week, c(av_lo av_hi) format(%9.1f)
 
+forval x = 1(1)7 {
+    preserve
+        keep if week == `x'
+        global da_lo`x'  : dis %5.1f av_lo
+        global da_mi`x'  : dis %5.1f av_hi
+        global da_hi`x' : dis %5.1f av_hi3
+    restore
+}
 
 
-/*
+
 
 ** --------------------------------------------------------------
 ** CONSTRUCTING THE SLIDE SET
@@ -545,7 +569,7 @@ global bullet = uchar(8226)
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
     putpdf text ("COVID-19") , font("Calibri Light", 32, 000000) linebreak
-    putpdf text ("OMICRON variant: Initial Estimates") , font("Calibri Light", 28, 808080) linebreak
+    putpdf text ("Omicron variant: Initial Estimates") , font("Calibri Light", 28, 808080) linebreak
     putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
     putpdf text ("      $bullet  Case estimates.") , font("Calibri Light", 22, 808080) linebreak
     putpdf text ("      $bullet  Hospitalisation estimates.") , font("Calibri Light", 22, 808080) linebreak
@@ -559,7 +583,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - the first 15-months"), halign(left) linebreak
+    putpdf table intro2(1,2)=("COVID-19 outbreaks - Omicron outbreak modelling"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
 
@@ -568,17 +592,18 @@ putpdf pagebreak
     putpdf text ("CASE RATE ASSUMPTIONS") , font("Calibri Light", 32, 000000) linebreak
     putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
     putpdf text ("      $bullet  R-values: Confidence Low to Moderate") , bold font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  R-values: 4.0 then 2.5 then 1.5 then 0.4 then 0.2") , font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  R-values: 4.5 then 3.4 then 1.6 then 0.5 then 0.3") , font("Calibri Light", 22, 808080) linebreak
     putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
-    putpdf text ("      $bullet  Length of OMICRON wave: Confidence Very Low") , bold font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  Wave length either 60-days or 45-days.") , font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  note: Delta wave was around 3-months") , italic font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  Length of Omicron wave: Confidence Very Low") , bold font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  Wave length either 45-days or 30-days.") , font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  note: Delta wave in Barbados was around 3-months") , italic font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  note: Sth Africa Omicron wave approx. 1 to 1.5 months") , italic font("Calibri Light", 22, 808080) linebreak
     putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
     putpdf text ("      $bullet  Prior Immunity: Confidence Low") , bold font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  Approx 63% of population double vaccinated.") , font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  Approx 53% of population double vaccinated.") , font("Calibri Light", 22, 808080) linebreak
     putpdf text ("      $bullet  Another 10% with prior infection.") , font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  Therefore, almost 75% of residents with some immunity.") , font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  Approx one-third (or 25%) with some immunity might avoid OMICRON.") , font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  Therefore, approx two-thirds of residents with some immunity.") , font("Calibri Light", 22, 808080) linebreak
+    putpdf text ("      $bullet  Approx 25% with some immunity might avoid Omicron.") , font("Calibri Light", 22, 808080) linebreak
 
 ** SLIDE 3 - 2021 delta wave
 putpdf pagebreak
@@ -589,7 +614,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("Estimated OMICRON cases"), halign(left) linebreak
+    putpdf table intro2(1,2)=("Estimated Omicron cases"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
@@ -607,13 +632,14 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("Estimated OMICRON cases"), halign(left) linebreak
+    putpdf table intro2(1,2)=("Estimated Omicron cases"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/caserate_predict_long.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Barbados wave 2022 - Longer anticipated wave") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  South Africa wave likely to last for approx. 35 days") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  We estimate wave duration of 30 days and 45 days") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
 
 ** SLIDE 5 - 2022 Omicron wave long
@@ -625,13 +651,14 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("Estimated OMICROM cases"), halign(left) linebreak
+    putpdf table intro2(1,2)=("Estimated Omicron cases"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/caserate_predict_short.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Barbados wave 2022 - Shortened wave through NPIs") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  South Africa wave likely to last for approx. 35 days") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  We estimate wave duration of 30 days and 45 days") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
 
 
@@ -644,7 +671,7 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 outbreaks - the first 15-months"), halign(left) linebreak
+    putpdf table intro2(1,2)=("Estimated Omicron hospitalisations"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
 
@@ -654,8 +681,9 @@ putpdf pagebreak
     putpdf text ("HOSPITALISATION ASSUMPTIONS") , font("Calibri Light", 32, 000000) linebreak
     putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
     putpdf text ("      $bullet  Hospitalisation Rate: Confidence Low") , bold font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  Higher estimate: 2.0% hospitalised") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("      $bullet  Lower estimate: 1.2% hospitalised") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("      $bullet  Highest estimate: 3.0% hospitalised") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("      $bullet  Mid-range estimate: 2.0% hospitalised") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("      $bullet  Lowest estimate: 1.2% hospitalised") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
     putpdf text ("      $bullet  Hospitalisation Length: Confidence Very Low") , bold font("Calibri Light", 22, 808080) linebreak
     putpdf text ("      $bullet  Higher estimate: 7 days in hospital on average") , font("Calibri Light", 24, 999999) linebreak
@@ -670,18 +698,17 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("Estimated OMICROM hospitalisations"), halign(left) linebreak
+    putpdf table intro2(1,2)=("Estimated Omicron hospitalisations"), halign(left) linebreak
     putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/caserate_predict_hosp.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Barbados wave 2022 - 60-day wave, 25% immunity") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Barbados wave 2022 - 45-day wave, 25% immunity") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
 
 
-
-** SLIDE 9 - CONCLUSIONS
+** SLIDE 9 - 2022 Omicron HOSPITALISED - average daily hospitalisations per week
 putpdf pagebreak
     putpdf table intro2 = (1,20), width(100%) halign(left)    
     putpdf table intro2(.,.), border(all, nil) valign(center)
@@ -690,28 +717,66 @@ putpdf pagebreak
     putpdf table intro2(1,2), colspan(14)
     putpdf table intro2(1,16), colspan(5)
     putpdf table intro2(1,1)=image("`outputpath'/uwi_crest_small.jpg")
-    putpdf table intro2(1,2)=("COVID-19 - OMICRON"), halign(left) linebreak
-    putpdf table intro2(1,2)=("(Updated on: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
+    putpdf table intro2(1,2)=("Estimated Omicron hospitalisations"), halign(left) linebreak
+    putpdf table intro2(1,2)=("(Updated: $S_DATE)"), halign(left) append  font("Calibri Light", 18, 000000)  
     putpdf table intro2(1,16)=(" "), halign(right)  font("Calibri Light", 16, 8c8c8c) linebreak
 
     putpdf paragraph  , halign(left) 
-    putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
-    putpdf text ("KEY MESSAGES") , font("Calibri Light", 32, 000000) linebreak
-    putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
-    putpdf text ("      $bullet  CASES") , bold font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  XX") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("      $bullet  XX") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text (" ") , font("Calibri Light", 28, 000000) linebreak
-    putpdf text ("      $bullet  HOSPITALISATIONS") , bold font("Calibri Light", 22, 808080) linebreak
-    putpdf text ("      $bullet  XX") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("      $bullet  XX") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("Daily Admissions per outbreak week") , bold font("Calibri Light", 24, 000000) linebreak
+
+    ** TABLE: DAILY ADMISSIONS
+    putpdf paragraph 
+    ///putpdf text (" ") , linebreak
+    putpdf table t1 = (8,4), width(75%) halign(center)    
+    putpdf table   t1(1,.), bold font("Calibri Light", 18, 000000) border(left,single, 8c8c8c) border(right,single, 8c8c8c)  border(top, single, 8c8c8c) border(bottom, single, 8c8c8c) bgcolor(e6e6e6)  
+    putpdf table t1(2/8,1), bold font("Calibri Light", 18, 000000) border(left,single, 8c8c8c) border(right,single, 8c8c8c)  border(top, single, 8c8c8c) border(bottom, single, 8c8c8c) bgcolor(e6e6e6) 
+    putpdf table t1(2/8,2), font("Calibri Light", 18, 000000) border(left,single, 8c8c8c) border(right,single, 8c8c8c)  border(top, single, 8c8c8c) border(bottom, single, 8c8c8c) bgcolor(ffffff) 
+    putpdf table t1(2/8,3), font("Calibri Light", 18, 000000) border(left,single, 8c8c8c) border(right,single, 8c8c8c)  border(top, single, 8c8c8c) border(bottom, single, 8c8c8c) bgcolor(ffffff) 
+    putpdf table t1(2/8,4), font("Calibri Light", 18, 000000) border(left,single, 8c8c8c) border(right,single, 8c8c8c)  border(top, single, 8c8c8c) border(bottom, single, 8c8c8c) bgcolor(ffffff) 
+
+    putpdf table t1(1,1)=("Week"), halign(center) 
+    putpdf table t1(1,2)=("1.2% hosp"), halign(center) 
+    putpdf table t1(1,3)=("2.0% hosp."), halign(center) 
+    putpdf table t1(1,4)=("3.0% hosp."), halign(center) 
+
+    putpdf table t1(2,1)=("one"), halign(center)
+    putpdf table t1(3,1)=("two"), halign(center)
+    putpdf table t1(4,1)=("three"), halign(center)
+    putpdf table t1(5,1)=("four"), halign(center)
+    putpdf table t1(6,1)=("five"), halign(center)
+    putpdf table t1(7,1)=("six"), halign(center)
+    putpdf table t1(8,1)=("seven"), halign(center)
+    
+    putpdf table  t1(2,2)=("${da_lo1}"), halign(center)
+    putpdf table  t1(3,2)=("${da_lo2}"), halign(center)
+    putpdf table  t1(4,2)=("${da_lo3}"), halign(center)
+    putpdf table  t1(5,2)=("${da_lo4}"), halign(center)
+    putpdf table  t1(6,2)=("${da_lo5}"), halign(center)
+    putpdf table  t1(7,2)=("${da_lo6}"), halign(center)
+    putpdf table  t1(8,2)=("${da_lo7}"), halign(center)
+
+    putpdf table  t1(2,3)=("${da_mi1}"), halign(center)
+    putpdf table  t1(3,3)=("${da_mi2}"), halign(center)
+    putpdf table  t1(4,3)=("${da_mi3}"), halign(center)
+    putpdf table  t1(5,3)=("${da_mi4}"), halign(center)
+    putpdf table  t1(6,3)=("${da_mi5}"), halign(center)
+    putpdf table  t1(7,3)=("${da_mi6}"), halign(center)
+    putpdf table  t1(8,3)=("${da_mi7}"), halign(center)
+
+    putpdf table  t1(2,4)=("${da_hi1}"), halign(center)
+    putpdf table  t1(3,4)=("${da_hi2}"), halign(center)
+    putpdf table  t1(4,4)=("${da_hi3}"), halign(center)
+    putpdf table  t1(5,4)=("${da_hi4}"), halign(center)
+    putpdf table  t1(6,4)=("${da_hi5}"), halign(center)
+    putpdf table  t1(7,4)=("${da_hi6}"), halign(center)
+    putpdf table  t1(8,4)=("${da_hi7}"), halign(center)
 
 ** Save the PDF
     local c_date = c(current_date)
     local date_string = subinstr("`c_date'", " ", "", .)
     * putpdf save "`outputpath'/COVID-slides-`date_string'", replace
-    putpdf save "`outputpath'/COVID-slides-omicron-dec2021", replace,
+    putpdf save "`outputpath'/COVID-slides-omicron-01jan2022", replace,
+
 
 
 
