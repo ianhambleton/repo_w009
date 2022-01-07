@@ -1,6 +1,6 @@
 ** HEADER -----------------------------------------------------
 **  DO-FILE METADATA
-    //  algorithm name			    caricom_06predict.do
+    //  algorithm name			    model_brb_05jan2022.do
     //  project:				    WHO Global Health Estimates
     //  analysts:				    Ian HAMBLETON
     // 	date last modified	    	31-MAr-2021
@@ -29,18 +29,18 @@
 
     ** Close any open log file and open a new log file
     capture log close
-    log using "`logpath'\caricom_06predict", replace
+    log using "`logpath'\model_brb_05jan2022", replace
 ** HEADER -----------------------------------------------------
 
 ** SIR model scenarios for Barbados OMICRON modelling
-do "`dopath'/slidedeck1_01_sir_scenarios4_2waves.do"
+do "`dopath'/model_brb_06jan2022_sir.do"
 
 ** Drop X initial observation days from scenarios to recognise that the outbreak has already started
 ** Do this in collaboration with public health
 forval x = 1(1)10 {
     use "`datapath'\covid2021-scenario`x'", replace
     sort days
-    drop if _n<=2
+    ** drop if _n<=2
     save "`datapath'\sc`x'-leftcensored", replace
 }
 
@@ -58,20 +58,21 @@ append using "`datapath'\sc7-leftcensored"
 append using "`datapath'\sc8-leftcensored"
 append using "`datapath'\sc9-leftcensored"
 append using "`datapath'\sc10-leftcensored"
-rename infect_new cases
+rename infect_new mcase
+label var mcase "modelled cases - the predictions"
 tempfile scenarios
 save `scenarios', replace
-append using "`datapath'\BRB_trajectory"
+append using "`datapath'\BRB_trajectory_2022"
 
 ** Order and sort the time series
-order scenario date iso country pop cases cases14 cases7 cases3
+order scenario date iso country pop case rcase mcase rcase_av_14 cases14 rcase_av_7 cases7 rcase_av_3 cases3
 sort scenario date days
 
 ** Fill-in the population size, and country names for the modelling scenarios
 gen d1 = date if scenario==0 & scenario[_n+1]==1
 egen d2 = min(d1)
 global fdate = d2
-replace date = $fdate + 3 if date==. & scenario!=scenario[_n-1] 
+replace date = $fdate + 1 if date==. & scenario!=scenario[_n-1] 
 replace date = date[_n-1] + 1 if date==.
 rename pop t1
 egen pop= min(t1)
@@ -83,26 +84,29 @@ global country = country
 rename country t2
 gen country = "$country"
 drop t1 t2 
-order scenario date iso country pop cases 
-keep scenario date iso country pop cases cases3 cases7 cases14 rcase_av_14 rcase_av_7
+order scenario date iso country pop mcase 
+keep scenario date iso country pop case rcase mcase rcase_av_14 cases14 rcase_av_7 cases7 rcase_av_3 cases3  
 sort scenario date
 
-** Convert cases to case-rate per 100,000 for the 8 scenarios (ie. scenarios 1 to 8)
-rename cases t1
-gen cases = t1
-replace cases = (cases/pop) * 100000 if scenario > 0
+** Convert cases to case-rate per 100,000 for the modelled scenarios
+** rename mcase t1
+** gen mrcase = mcase
+gen mrcase = (mcase/pop) * 100000 if scenario > 0
 
 ** Estimate smoothed curves for prediction
-lowess cases date if iso=="BRB" & scenario==1, bwidth(0.5) gen(cases_scen1) name(sc1) ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==2, bwidth(0.5) gen(cases_scen2) name(sc2) ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==3, bwidth(0.5) gen(cases_scen3) name(sc3) ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==4, bwidth(0.5) gen(cases_scen4) name(sc4)  ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==5, bwidth(0.5) gen(cases_scen5) name(sc5)  ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==6, bwidth(0.5) gen(cases_scen6) name(sc6)  ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==7, bwidth(0.5) gen(cases_scen7) name(sc7)  ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==8, bwidth(0.5) gen(cases_scen8) name(sc8)  ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==9, bwidth(0.5) gen(cases_scen9) name(sc9)  ylab(0(20)100)
-lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) name(sc10)  ylab(0(20)100)
+** This is a final MINOR smooth to remove the "joins" between 
+** time periods with changing R values
+** IN reality the r-value will change smoothly...
+lowess mrcase date if iso=="BRB" & scenario==1 , bwidth(0.5) gen(cases_scen1) name(sc1) ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==2 , bwidth(0.5) gen(cases_scen2) name(sc2) ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==3 , bwidth(0.5) gen(cases_scen3) name(sc3) ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==4 , bwidth(0.5) gen(cases_scen4) name(sc4)  ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==5 , bwidth(0.5) gen(cases_scen5) name(sc5)  ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==6 , bwidth(0.5) gen(cases_scen6) name(sc6)  ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==7 , bwidth(0.5) gen(cases_scen7) name(sc7)  ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==8 , bwidth(0.5) gen(cases_scen8) name(sc8)  ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==9 , bwidth(0.5) gen(cases_scen9) name(sc9)  ylab(0(20)100)
+lowess mrcase date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) name(sc10)  ylab(0(20)100)
 
 
 ** --------------------------------------------------------------
@@ -171,9 +175,9 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
         local louter1 5 $date1  5 $ldate2
 
 
-
 ** --------------------------------------------------------------
 ** BARBADOS OUTBREAK CURVE - JUL to DEC 2021
+** LOWESS SMOOTH OF 
 ** --------------------------------------------------------------
         #delimit ;
             gr twoway 
@@ -232,7 +236,7 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
                     name(predicted_BRB) 
                     ;
             #delimit cr
-            graph export "`outputpath'/caserate_BRB_clean4.png", replace width(4000) 
+            graph export "`outputpath'/caserate_BRB.png", replace width(4000) 
 
 ** --------------------------------------------------------------
 ** LONGER WAVE LENGTH
@@ -299,13 +303,71 @@ lowess cases date if iso=="BRB" & scenario==10, bwidth(0.5) gen(cases_scen10) na
                     lab(5 "Lower protection")
                     lab(6 "Higher protection")
                     )
-                    name(predicted_BRB_long) 
+                    name(BRB_long) 
                     ;
             #delimit cr
-            graph export "`outputpath'/caserate_predict_long.png", replace width(4000) 
+            graph export "`outputpath'/caserate_BRB_predict_long.png", replace width(4000) 
+
+** --------------------------------------------------------------
+** LONGER WAVE LENGTH: MAGNIFY THE JOIN BETWEEN PAST AND FUTURE
+** --------------------------------------------------------------
+        #delimit ;
+            gr twoway 
+                /// outer boxes 
+                (scatteri `louter1'  , recast(line) lw(2) lc("`red5'%40") fc  (none) )                            
+
+                /// Observed
+                (line cases3 date if scenario==0 & date>=d(25dec2021) , sort lc("gs8") lw(0.4) lp("-"))
+                (line rcase_av_7 date if scenario==0 & date>=d(25dec2021)  , sort lc("`ora'*1.2") lw(0.2) lp("l"))
+                (rarea x0 rcase_av_7 date if scenario==0 & date>=d(25dec2021)  , sort col("`ora'%40") lw(none))        
+
+                (rarea cases_scen6 cases_scen8 date if iso=="BRB" & date>=d(25dec2021)  , sort col("`red1'%60") lw(none))         
+                (rarea cases_scen8 cases_scen10 date if iso=="BRB" & date>=d(25dec2021)  , sort col("`red4'%60") lw(none))         
+                
+                /// Longer wavelength
+                (line cases_scen6 date if scenario==6 & iso=="BRB" & date>=d(25dec2021)  , sort lc("gs6") lw(0.3) lp("-"))
+                ///(line cases_scen8 date if scenario==8 & iso=="BRB" & date>=d(25dec2021)  , sort lc("gs6") lw(0.3) lp("-"))
+                ///(line cases_scen10 date if scenario==10 & iso=="BRB" & date>=d(25dec2021)  , sort lc("gs6") lw(0.3) lp("-"))
+
+                ,
+                    plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
+                    graphregion(color(gs16) ic(gs16) ilw(thin) lw(thin)) 
+                    bgcolor(white) 
+                    ysize(6) xsize(18)
+
+                    xlab(
+                            22646 "1 Jan 2022"
+                    , 
+                    labs(4) notick nogrid glc(gs16))
+                    xscale(noline ) 
+                    xtitle("Outbreak month (2021-22)", size(4) margin(l=2 r=2 t=4 b=2)) 
+
+                    ylab(
+                    ,
+                    labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
+                    ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
+                    yscale(noline) 
+                    ///ytick(0(50)1400)
+                    ///ymtick(0(25)1400)
+
+                    text(40.5 22330 "Barbados" ,  place(e) size(5.5) color(gs8) just(left))
+                    text(${nloc6} 22514 "${wlength2}-day wave: Peak of ${peak7} per 100k (Total cases, ${tot7})"  ,  place(e) size(7.5) color(gs8) just(left))
+                    text(0 $date3 "${wlength2} day" ,  place(c) size(4.5) color(gs4) just(left))
 
 
+                    legend(size(4) position(11) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lw(0.1)
+                    region(fcolor(gs16) lw(vthin) margin(l=2 r=2 t=2 b=2) lc(gs16)) 
+                    symysize(5) symxsize(7)
+                    order(5 6) 
+                    lab(5 "Lower protection")
+                    lab(6 "Higher protection")
+                    )
+                    name(BRB_long_close) 
+                    ;
+            #delimit cr
+            graph export "`outputpath'/caserate_BRB_predict_long_close.png", replace width(4000) 
 
+/*
 ** --------------------------------------------------------------
 ** SHORTER WAVE LENGTH
 ** --------------------------------------------------------------
@@ -531,7 +593,8 @@ forval x = 1(1)7 {
     preserve
         gen week = week(date) 
         order week, after(date)
-        collapse (mean) av_lo=dhosp_lo av_hi=dhosp_hi av_hi3=dhosp_hi3, by(week)        keep if week == `x'
+        collapse (mean) av_lo=dhosp_lo av_hi=dhosp_hi av_hi3=dhosp_hi3, by(week)       
+        keep if week == `x'
         global da_lo`x'  : dis %5.1f av_lo
         global da_mi`x'  : dis %5.1f av_hi
         global da_hi`x' : dis %5.1f av_hi3
@@ -779,7 +842,7 @@ putpdf pagebreak
     local c_date = c(current_date)
     local date_string = subinstr("`c_date'", " ", "", .)
     * putpdf save "`outputpath'/COVID-slides-`date_string'", replace
-    putpdf save "`outputpath'/COVID-slides-omicron-mohw", replace,
+    putpdf save "`outputpath'/COVID-slides-omicron-mohw-`date_string'", replace,
 
 
 
