@@ -258,7 +258,7 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/slide1G.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Suriname - outbreak #5, Omicron") , font("Calibri Light", 24, 999999) linebreak
     putpdf text (" ") , font("Calibri Light", 24, 000000) linebreak
 
 ** SLIDE 2H (JAMAICA current)
@@ -276,8 +276,8 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/slide1H.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Suriname - outbreak #5, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Jamaica - outbreak #4, Omicron") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2I (GUYANA current)
 putpdf pagebreak
@@ -294,9 +294,9 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/slide1I.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Suriname - outbreak #5, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Jamaica - outbreak #4, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021, then Omicron") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2J (BAHAMAS current)
 putpdf pagebreak
@@ -313,9 +313,9 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/slide1J.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Suriname - outbreak #5, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Jamaica - outbreak #4, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021, then Omicron") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  The Bahamas - Extended wave in Autumn 2021, and new wave beginning") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2K (BARBADOS current)
@@ -333,11 +333,11 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/slide1K.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Suriname - outbreak #5, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Jamaica - outbreak #4, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021, then Omicron") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  The Bahamas - Extended wave in Autumn 2021, and new wave beginning") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Barbados - large outbreak in Autumn 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Barbados - large outbreak in Autumn 2021, then Omicron") , font("Calibri Light", 24, 999999) linebreak
 
 ** SLIDE 2L (TRINIDAD current)
 putpdf pagebreak
@@ -354,11 +354,11 @@ putpdf pagebreak
     putpdf table f2 = (1,1), width(100%) border(all,nil) halign(left)
     putpdf table f2(1,1)=image("`outputpath'/slide1L.png")
     putpdf paragraph 
-    putpdf text ("$bullet  Suriname - outbreak #4") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Jamaica - outbreak #3") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Guyana - peak in October 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Suriname - outbreak #5, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Jamaica - outbreak #4, Omicron") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Guyana - peak in October 2021, then Omicron") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  The Bahamas - Extended wave in Autumn 2021, and new wave beginning") , font("Calibri Light", 24, 999999) linebreak
-    putpdf text ("$bullet  Barbados - large outbreak in Autumn 2021") , font("Calibri Light", 24, 999999) linebreak
+    putpdf text ("$bullet  Barbados - large outbreak in Autumn 2021, then Omicron") , font("Calibri Light", 24, 999999) linebreak
     putpdf text ("$bullet  Trinidad - 3rd wave in Dec 2021") , font("Calibri Light", 24, 999999) linebreak
 
 

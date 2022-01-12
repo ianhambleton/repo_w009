@@ -248,7 +248,7 @@ foreach country of local clist {
 ** (5) Rate increasing, decreasing or steady (-accelerate-)
     sort iso date
     gen t1 = 1 if iso!=iso[_n+1] & iso=="`country'"
-    gen t2 = accelerate7 if t1==1
+    gen t2 = accelerate3 if t1==1
     egen t3 = min(t2) if iso=="`country'"
     gen t4 = 1 if t3>0 & t1==1
     replace t4 = 2 if t3<0 & t1==1
