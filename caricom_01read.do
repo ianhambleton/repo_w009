@@ -170,8 +170,8 @@
 ** Loading 2022 COVID surveillance data
 ** Chunk: Running 2022 : JAN (01)
 local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
-local month = 1 
-///forvalues month = 10/12 {
+///local month = 1 
+forvalues month = 1/3 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -193,10 +193,10 @@ local month = 1
       generate tempdate = "`today'"
       capture save "`today'", replace
    }
-///}
+}
 clear
-local month = 1 
-///forvalues month = 10/12 {
+///local month = 1 
+forvalues month = 1/3 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -204,7 +204,7 @@ local month = 1
       local today = "`month'-`day'-`year'"
       capture append using "`today'"
    }
-///}
+}
 save "`datapath'\jh_time_series2022_jan", replace
 
 

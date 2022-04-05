@@ -149,3 +149,13 @@ label values group group_
 
 ** Save the cleaned and restricted dataset
 save "`datapath'\caricom_covid", replace
+
+
+** 22-MAR-2022
+** Dataset (BRB, JAM) for Alana Griffith
+** Save as Excel
+keep if iso=="BRB" | iso=="JAM"
+drop cgroup group iso_num 
+label data "COVID19 cases and deaths: Barbados and Jamaica"
+order date countryregion iso pop new_cases total_cases new_deaths total_deaths
+export excel using "`datapath'\covid_brb_jam.xlsx", first(var) sh("covid-data", replace) 

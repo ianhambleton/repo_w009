@@ -271,7 +271,7 @@ keep if date >= 22462
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f) labgap(2))
                     ytitle("Case rate per 100,000", size(4) margin(l=2 r=2 t=2 b=2)) 
-                    yscale(noline range(0(50)${ht1})) 
+                    yscale(noline range(0(100)${ht1})) 
                     ytick(0(50)1000)
                     ymtick(0(25)1000)
 
