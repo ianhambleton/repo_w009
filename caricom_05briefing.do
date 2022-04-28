@@ -167,7 +167,9 @@ foreach country of local clist {
                     3185 "Apr"
                     3198 "Jul"
                     3211 "Oct"
-            , labs(5) nogrid glc(gs16) angle(0) format(%9.0f))
+                    3224 "Jan"
+                    3237 "Apr"
+                    , labs(5) nogrid glc(gs16) angle(0) format(%9.0f))
             xtitle("Outbreak timeline (2020-2021)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
                 
             ylab(
@@ -204,6 +206,7 @@ foreach country of local clist {
                     3198 "Jul"
                     3211 "Oct"
                     3224 "Jan"
+                    3237 "Apr"
             , labs(5) nogrid glc(gs16) angle(0) format(%9.0f))
             xtitle("Outbreak timeline (2020-2021)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
                 

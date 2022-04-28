@@ -171,7 +171,7 @@
 ** Chunk: Running 2022 : JAN (01)
 local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
 ///local month = 1 
-forvalues month = 1/3 {
+forvalues month = 1/6 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
@@ -196,7 +196,7 @@ forvalues month = 1/3 {
 }
 clear
 ///local month = 1 
-forvalues month = 1/3 {
+forvalues month = 1/6 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
