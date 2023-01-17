@@ -25,7 +25,7 @@
     local outputpath "X:\OneDrive - The University of the West Indies\Writing\w009\outputs"
 
     ** ianhambleton.com: WEBSITE outputs
-    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton\static\uploads"
+    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton-2023\static\uploads"
 
     ** Close any open log file and open a new log file
     capture log close
@@ -302,16 +302,16 @@ preserve
         local red6 `r(p6)'
 
 ** COLORS - W3 flat colors
-    colorpalette w3 flat, nograph
+    colorpalette d3 , 20 nograph
     local list r(p) 
     ** Age groups
-    local gre `r(p7)'
-    local blu `r(p8)'  
-    local pur `r(p9)'
-    local yel `r(p11)'
-    local ora `r(p12)'    
-    local red `r(p13)'       
-    local gry `p(p19)'   
+    local gre `r(p6)'
+    local blu `r(p2)'  
+    local pur `r(p10)'
+    local yel `r(p18)'
+    local ora `r(p4)'    
+    local red `r(p8)'       
+    local gry `p(p16)'   
 
     ** OUTLINE BORDERS
     ** These outlines needs to be above the maximum of the y-axis
@@ -370,21 +370,23 @@ preserve
                 
 
                     xlab(
-                            22006 "1 Apr 20"
-                            22097 "1 Jul 20"
-                            22189 "1 Oct 20"
-                            22281 "1 Jan 21"
-                            22371 "1 Apr 21"
-                            22462 "1 Jul 21" 
-                            22554 "1 Oct 21" 
-                            22646 "1 Jan 22" 
-                            22736 "1 Apr 22"
+                            22006 "Apr 20"
+                            22097 "Jul 20"
+                            22189 "Oct 20"
+                            22281 "Jan 21"
+                            22371 "Apr 21"
+                            22462 "Jul 21" 
+                            22554 "Oct 21" 
+                            22646 "Jan 22" 
+                            22736 "Apr 22"
+                            22827 "Jul 22"
+                            22919 "Oct 22"
+                            23011 "Jan 23"
                     , 
                     labs(4) notick nogrid glc(gs16))
                     xscale(noline) 
                     xtitle("Outbreak month (2020 to 2021)", size(4) margin(l=2 r=2 t=4 b=2)) 
                     
-
                     ylab(0 $maxy   
                     ,
                     labs(4) nogrid notick glc(gs16) angle(0) format(%9.0f))
@@ -468,7 +470,6 @@ preserve
     local date_string = subinstr("`c_date'", " ", "", .)
     putpdf save "`webpath'\caserate_`country'", replace
 }
-
 
 ** COMPLETE SET FOR CARICOM
 ** SINGLE PAGE PDF

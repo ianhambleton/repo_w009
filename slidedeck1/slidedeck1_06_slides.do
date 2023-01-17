@@ -28,7 +28,7 @@
     local outputpath "X:\OneDrive - The University of the West Indies\Writing\w009\outputs"
 
     ** ianhambleton.com: WEBSITE outputs
-    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton\static\uploads"
+    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton-2023\static\uploads"
 
     ** Close any open log file and open a new log file
     capture log close
@@ -54,16 +54,16 @@ global bullet = uchar(8226)
     local w5 `r(p5)' 
 
 ** COLORS - W3 flat colors
-    colorpalette w3 flat, nograph
+    colorpalette d3 , 20 nograph
     local list r(p) 
     ** Age groups
-    local gre `r(p7)'
-    local blu `r(p8)'  
-    local pur `r(p9)'
-    local yel `r(p11)'
-    local ora `r(p12)'    
-    local red `r(p13)'       
-    local gry `p(p19)'    
+    local gre `r(p6)'
+    local blu `r(p2)'  
+    local pur `r(p10)'
+    local yel `r(p18)'
+    local ora `r(p4)'    
+    local red `r(p8)'       
+    local gry `p(p16)'    
 
 ** TITLE, ATTRIBUTION, DATE of CREATION
     putpdf begin, pagesize(letter) landscape font("Calibri Light", 10) margin(top,0.5cm) margin(bottom,0.25cm) margin(left,0.5cm) margin(right,0.25cm)
@@ -733,7 +733,7 @@ putpdf pagebreak
     putpdf table f2(2,3)=image("`outputpath'/caserate_spark_BRB.png")
     putpdf table f2(2,4)=image("`outputpath'/caserate_spark_BLZ.png")
 
-    putpdf table f2(3,1)=("Dominica:%"), halign(left) font("Calibri Light", 12, 000000)  
+    putpdf table f2(3,1)=("Dominica:"), halign(left) font("Calibri Light", 12, 000000)  
     /// putpdf table f2(3,1)=("${p14_DMA}%"), halign(left) font("Calibri Light", 12, 808080) append  
     putpdf table f2(3,2)=("Grenada:"), halign(left) font("Calibri Light", 12, 000000)  
     /// putpdf table f2(3,2)=("${p14_GRD}%"), halign(left) font("Calibri Light", 12, 808080) append  

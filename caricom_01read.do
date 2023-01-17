@@ -167,15 +167,56 @@
 /// save "`datapath'\jh_time_series2021_jan_dec", replace
 
 
-** Loading 2022 COVID surveillance data
-** Chunk: Running 2022 : JAN (01)
+/// ** Loading 2022 COVID surveillance data
+/// ** Chunk: Running 2022 : JAN (01)
+/// local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
+/// ///local month = 1 
+/// forvalues month = 1/12 {
+///    forvalues day = 1/31 {
+///       local month = string(`month', "%02.0f")
+///       local day = string(`day', "%02.0f")
+///       local year = "2022"
+///       local today = "`month'-`day'-`year'"
+///       local FileName = "`URL'`today'.csv"
+///       clear
+///       capture import delimited "`FileName'"
+///       capture confirm variable ïprovincestate
+///       if _rc == 0 {
+///          rename ïprovincestate provincestate
+///          label variable provincestate "Province/State"
+///       }
+///       capture rename province_state provincestate
+///       capture rename country_region countryregion
+///       capture rename last_update lastupdate
+///       capture rename lat latitude
+///       capture rename long longitude
+///       generate tempdate = "`today'"
+///       capture save "`today'", replace
+///    }
+/// }
+/// clear
+/// ///local month = 1 
+/// forvalues month = 1/12 {
+///    forvalues day = 1/31 {
+///       local month = string(`month', "%02.0f")
+///       local day = string(`day', "%02.0f")
+///       local year = "2022"
+///       local today = "`month'-`day'-`year'"
+///       capture append using "`today'"
+///    }
+/// }
+/// save "`datapath'\jh_time_series2022_jan", replace
+
+
+** Loading 2023 COVID surveillance data
+** Chunk: Running 2023
 local URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/"
 ///local month = 1 
-forvalues month = 1/6 {
+forvalues month = 1/3 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
-      local year = "2022"
+      local year = "2023"
       local today = "`month'-`day'-`year'"
       local FileName = "`URL'`today'.csv"
       clear
@@ -196,16 +237,16 @@ forvalues month = 1/6 {
 }
 clear
 ///local month = 1 
-forvalues month = 1/6 {
+forvalues month = 1/3 {
    forvalues day = 1/31 {
       local month = string(`month', "%02.0f")
       local day = string(`day', "%02.0f")
-      local year = "2022"
+      local year = "2023"
       local today = "`month'-`day'-`year'"
       capture append using "`today'"
    }
 }
-save "`datapath'\jh_time_series2022_jan", replace
+save "`datapath'\jh_time_series2023", replace
 
 
 
@@ -213,7 +254,9 @@ save "`datapath'\jh_time_series2022_jan", replace
 use "`datapath'\jh_time_series2020", clear
 append using "`datapath'\jh_time_series2021_jan_dec"
 append using "`datapath'\jh_time_series2022_jan"
+append using "`datapath'\jh_time_series2023"
 save "`datapath'\jh_time_series_full", replace
+
 
 
 tempfile TCA AIA BMU CYM MSR VGB

@@ -28,7 +28,7 @@
     local outputpath "X:\OneDrive - The University of the West Indies\Writing\w009\outputs"
 
     ** ianhambleton.com: WEBSITE outputs
-    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton\static\uploads"
+    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton-2023\static\uploads"
 
     ** Close any open log file and open a new log file
     capture log close

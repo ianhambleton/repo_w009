@@ -28,7 +28,7 @@
     local outputpath "X:\OneDrive - The University of the West Indies\Writing\w009\outputs"
 
     ** ianhambleton.com: WEBSITE outputs
-    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton\static\uploads"
+    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton-2023\static\uploads"
 
     ** Close any open log file and open a new log file
     capture log close
@@ -111,13 +111,14 @@ gen x0 = 0
 label define iso_num 1000 "CAR", modify
 label values iso_num iso_num
 
-
+** Removal of negative death/case adjustments for graphing 
+replace new_deaths=0 if new_deaths<0
+replace new_cases=0 if new_cases<0
 
 ** LOOP through N=20 CARICOM member states
 ** The looping structure AFTER the PDF creation
 ** It means that we create 1 PDF for each COUNTRY ISO listed in the local macros -clist-
 local clist "CAR AIA ATG BHS BLZ BMU BRB CYM DMA GRD GUY HTI JAM KNA LCA MSR SUR TCA TTO VCT VGB"
-** local clist "BRB"
 foreach country of local clist {
     ** This code chunk creates COUNTRY ISO CODE and COUNTRY NAME
     ** for automated use in the PDF reports.
@@ -137,16 +138,16 @@ foreach country of local clist {
 
 
 ** COLORS - W3 flat colors
-    colorpalette w3 flat, nograph
+    colorpalette d3 , 20 nograph
     local list r(p) 
     ** Age groups
-    local gre `r(p7)'
-    local blu `r(p8)'  
-    local pur `r(p9)'
-    local yel `r(p11)'
-    local ora `r(p12)'    
-    local red `r(p13)'       
-    local gry `p(p19)'  
+    local gre `r(p6)'
+    local blu `r(p2)'  
+    local pur `r(p10)'
+    local yel `r(p18)'
+    local ora `r(p4)'    
+    local red `r(p8)'       
+    local gry `p(p16)'  
 
 ** GRAPHIC 1: DEATHS
         #delimit ;
@@ -163,18 +164,22 @@ foreach country of local clist {
                     3133 "Apr"
                     3146 "Jul"
                     3160 "Oct"
-                    3172 "Jan"
+                    3172 "Jan 21"
                     3185 "Apr"
                     3198 "Jul"
                     3211 "Oct"
-                    3224 "Jan"
+                    3224 "Jan 22"
                     3237 "Apr"
-                    , labs(5) nogrid glc(gs16) angle(0) format(%9.0f))
-            xtitle("Outbreak timeline (2020-2021)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
+                    3250 "Jul"
+                    3263 "Oct"
+                    3276 "Jan 23"
+                    , labs(5) nogrid glc(gs16) angle(45) format(%9.0f))
+            xtitle("Outbreak timeline (2020-2023)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
                 
             ylab(
             , labs(5) notick nogrid glc(gs16) angle(0))
             yscale(fill noline) 
+            xscale(fill) 
             ytitle("Weekly deaths", size(5.5) margin(l=2 r=2 t=2 b=2)) 
             
             legend(off size(6) position(5) ring(0) bm(t=1 b=1 l=1 r=1) colf cols(1) lc(gs16)
@@ -201,14 +206,17 @@ foreach country of local clist {
                     3133 "Apr"
                     3146 "Jul"
                     3160 "Oct"
-                    3172 "Jan"
+                    3172 "Jan 21"
                     3185 "Apr"
                     3198 "Jul"
                     3211 "Oct"
-                    3224 "Jan"
+                    3224 "Jan 22"
                     3237 "Apr"
-            , labs(5) nogrid glc(gs16) angle(0) format(%9.0f))
-            xtitle("Outbreak timeline (2020-2021)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
+                    3250 "Jul"
+                    3263 "Oct"
+                    3276 "Jan 23"
+            , labs(5) nogrid glc(gs16) angle(45) format(%9.0f))
+            xtitle("Outbreak timeline (2020-2023)", size(5.5) margin(l=2 r=2 t=5 b=2)) 
                 
             ylab(
             , labs(5) notick nogrid glc(gs16) angle(0))
@@ -346,7 +354,7 @@ foreach country of local clist {
     putpdf save "`webpath'/briefing_`country'", replace
 }
 
-
+/*
 
 ** -----------------------------------------------
 ** ALL BRIEFINGS IN A SINGLE PDF

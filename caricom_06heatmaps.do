@@ -28,7 +28,7 @@
     local outputpath "X:\OneDrive - The University of the West Indies\Writing\w009\outputs"
 
     ** ianhambleton.com: WEBSITE outputs
-    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton\static\uploads"
+    local webpath "X:\OneDrive - The University of the West Indies\repo_ianhambleton\website-ianhambleton-2023\static\uploads"
 
     ** Close any open log file and open a new log file
     capture log close
@@ -177,8 +177,12 @@ replace metric = . if metric<=0 & mtype==1
             22349 "Mar 21"
             22441 "Jun 21"
             22533 "Sep 21"
-            22655 "Jan 22"
-            $fdate "$fdatef"
+            22624 "Dec 21"
+            22714 "Mar 22" 
+            22806 "Jun 22"
+            22898 "Sep 22"
+            22989 "Dec 22"
+            ///$fdate "$fdatef"
     , labs(2.5) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
     title("Daily cases by $S_DATE", pos(11) ring(1) size(3.5))
@@ -269,8 +273,12 @@ replace metric = . if metric<=0 & mtype==3
             22349 "Mar 21"
             22441 "Jun 21"
             22533 "Sep 21"
-            22655 "Jan 22"            
-            $fdate "$fdatef"
+            22624 "Dec 21"
+            22714 "Mar 22" 
+            22806 "Jun 22"
+            22898 "Sep 22"
+            22989 "Dec 22"
+            ///$fdate "$fdatef"
     , labs(2.5) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
     title("Case rate by $S_DATE", pos(11) ring(1) size(3.5))
@@ -361,8 +369,12 @@ replace metric = . if metric<=0 & mtype==2
             22349 "Mar 21"
             22441 "Jun 21"
             22533 "Sep 21"
-            22655 "Jan 22"
-            $fdate "$fdatef"
+            22624 "Dec 21"
+            22714 "Mar 22" 
+            22806 "Jun 22"
+            22898 "Sep 22"
+            22989 "Dec 22"
+            ///$fdate "$fdatef"
     , labs(2.5) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
     title("Cumulative cases by $S_DATE", pos(11) ring(1) size(3.5))
@@ -435,8 +447,12 @@ replace metric = . if metric<=0 & mtype==5
             22349 "Mar 21"
             22441 "Jun 21"
             22533 "Sep 21"
-            22655 "Jan 22"
-            $fdate "$fdatef"
+            22624 "Dec 21"
+            22714 "Mar 22" 
+            22806 "Jun 22"
+            22898 "Sep 22"
+            22989 "Dec 22"
+            ///$fdate "$fdatef"
     , labs(1.75) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
     title("Cumulative deaths by $S_DATE", pos(11) ring(1) size(3.5))
@@ -510,9 +526,13 @@ replace metric = . if metric<=0 & mtype==4
             22349 "Mar 21"
             22441 "Jun 21"
             22533 "Sep 21"
-            22655 "Jan 22"
-            $fdate "$fdatef"
-    , labs(1.75) nogrid glc(gs16) angle(45) format(%9.0f))
+            22624 "Dec 21"
+            22714 "Mar 22" 
+            22806 "Jun 22"
+            22898 "Sep 22"
+            22989 "Dec 22"
+            ///$fdate "$fdatef"
+   , labs(1.75) nogrid glc(gs16) angle(45) format(%9.0f))
     xtitle(" ", size(1) margin(l=0 r=0 t=0 b=0)) 
     title("Daily deaths by $S_DATE", pos(11) ring(1) size(3.5))
     legend(size(2.75) position(2) ring(5) colf cols(1) lc(gs16)
@@ -691,3 +711,4 @@ putpdf pagebreak
     local c_date = c(current_date)
     local date_string = subinstr("`c_date'", " ", "", .)
     putpdf save "`webpath'/heatmaps_CARICOM", replace
+    

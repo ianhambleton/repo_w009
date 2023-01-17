@@ -120,17 +120,16 @@ gen x0 = 0
     local red6 `r(p6)'
 
 ** COLORS - W3 flat colors
-    colorpalette w3 flat, nograph
+    colorpalette d3 , 20 nograph
     local list r(p) 
     ** Age groups
-    local gre `r(p7)'
-    local blu `r(p8)'  
-    local pur `r(p9)'
-    local yel `r(p11)'
-    local ora `r(p12)'    
-    local red `r(p13)'       
-    local gry `p(p19)'   
-
+    local gre `r(p6)'
+    local blu `r(p2)'  
+    local pur `r(p10)'
+    local yel `r(p18)'
+    local ora `r(p4)'    
+    local red `r(p8)'       
+    local gry `p(p16)'   
 
         #delimit ;
             gr twoway 

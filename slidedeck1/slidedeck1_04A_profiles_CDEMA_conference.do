@@ -229,16 +229,16 @@ preserve
     local red5 `r(p5)'  
     local red6 `r(p6)'
 ** COLORS - W3 flat colors
-    colorpalette d3 , 20 nograph
+    colorpalette w3 flat, nograph
     local list r(p) 
     ** Age groups
-    local gre `r(p6)'
-    local blu `r(p2)'  
-    local pur `r(p10)'
-    local yel `r(p18)'
-    local ora `r(p4)'    
-    local red `r(p8)'       
-    local gry `p(p16)'   
+    local gre `r(p7)'
+    local blu `r(p8)'  
+    local pur `r(p9)'
+    local yel `r(p11)'
+    local ora `r(p12)'    
+    local red `r(p13)'       
+    local gry `p(p19)'   
 
     ** OUTLINE BORDERS
     ** These outlines needs to be above the maximum of the y-axis
@@ -266,7 +266,7 @@ preserve
 
                 /// CARICOM average
                 (line lowess_3 date if iso=="`country'" & date>=22281 & lowess_14>=0, sort lc("gs8") lw(0.4) lp("-"))
-                (rarea x0 lowess_3 date if iso=="`country'" & date>=22281  & lowess_14>=0, sort col("`pur'%40") lw(none))         
+                (rarea x0 lowess_3 date if iso=="`country'" & date>=22281  & lowess_14>=0, sort col("250 192 144%40") lw(none))         
     
                 ,
                     plotregion(c(gs16) ic(gs16) ilw(thin) lw(thin)) 
